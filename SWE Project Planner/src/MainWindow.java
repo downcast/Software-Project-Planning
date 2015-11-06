@@ -16,9 +16,6 @@ import javax.swing.JLayeredPane;
 import javax.swing.JTextField;
 import java.awt.Font;
 import javax.swing.JLabel;
- 
-//marcus is the high today
-//Edit
 
 public class MainWindow {
 
@@ -46,6 +43,8 @@ public class MainWindow {
 	public MainWindow() {
 		initialize();
 	}
+	
+	
 
 	/**
 	 * Initialize the contents of the frame.
@@ -124,7 +123,7 @@ public class MainWindow {
 		lblEffortMonitoringandTracking.setBounds(298, 41, 250, 22);
 		EffortMonitoring.add(lblEffortMonitoringandTracking);
 		
-		
+		// ------------------Main Menu-----------------------------------
 		MainMenu.setBounds(200, 0, 815, 541);
 		frmProjectManager.getContentPane().add(MainMenu);
 		MainMenu.setLayout(null);
@@ -135,6 +134,27 @@ public class MainWindow {
 		lblMainMenu.setBounds(351, 41, 168, 22);
 		MainMenu.add(lblMainMenu);
 		
+		JButton welcomeButton = new JButton("Welcome Screen");
+		welcomeButton.setBounds(40, 80, 150, 50);
+		MainMenu.add(welcomeButton);
+		
+		welcomeButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//frmProjectManager.setVisible(false);
+				frmProjectManager.dispose();
+				WelcomeScreen ws = new WelcomeScreen();
+
+			}
+		});
+		
+		
+		
+		//----------------------------------------------------------------
+		
+		
+		
+		
+		//-------------------General--------------------------------------
 		General.setBounds(200, 0, 815, 541);
 		frmProjectManager.getContentPane().add(General);
 		General.setLayout(null);
@@ -144,6 +164,11 @@ public class MainWindow {
 		lblGeneral.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblGeneral.setBounds(351, 41, 168, 22);
 		General.add(lblGeneral);
+		
+		
+		
+		
+		//-----------------------------------------------------------------
 		
 		
 		Requirements.setBounds(200, 0, 815, 541);
