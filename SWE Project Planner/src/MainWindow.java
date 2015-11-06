@@ -18,6 +18,7 @@ import java.awt.Font;
 import javax.swing.JLabel;
  
 //marcus is the high today
+//Edit
 
 public class MainWindow {
 
