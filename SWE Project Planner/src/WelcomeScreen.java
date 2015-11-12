@@ -20,6 +20,7 @@ import javax.swing.ScrollPaneConstants;
 import javax.swing.JProgressBar;
 import java.io.File;
 import java.io.FileWriter;
+import java.io.*;
 
 
 public class WelcomeScreen {
@@ -188,6 +189,12 @@ public class WelcomeScreen {
 		panel_1.setLayout(null);
 		panel_1.setPreferredSize(new Dimension(609, 2000));
 		
+		EnterInfoButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				EnterInformation();
+			}
+		});
+		
 		
 		
 		JLabel lblprojectName = new JLabel("*Project Name:");
@@ -261,6 +268,17 @@ public class WelcomeScreen {
 	{
 		projectName = projectNameField.getText();
 		File file = new File("" + projectName + ".txt");
+		
+		FileWriter writer = null;
+	    try {
+	        writer = new FileWriter(file);
+	        writer.write("test");
+	    } catch (IOException e) {
+	        e.printStackTrace(); // I'd rather declare method with throws IOException and omit this catch.
+	    } finally {
+	        if (writer != null) try { writer.close(); } catch (IOException ignore) {}
+	    }
+	    System.out.printf("File is located at %s%n", file.getAbsolutePath());
 		
 	}
 }
