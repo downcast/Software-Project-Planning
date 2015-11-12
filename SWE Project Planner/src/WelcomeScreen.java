@@ -1,5 +1,7 @@
 import java.awt.EventQueue;
-import java.awt.Font;
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -173,6 +175,7 @@ public class WelcomeScreen {
 		NewProjectPane.add(panel_1);
 		panel_1.setVisible(true);
 		panel_1.setLayout(null);
+		panel_1.setPreferredSize(new Dimension(609, 2000));
 		
 		JLabel lblprojectName = new JLabel("*Project Name:");
 		lblprojectName.setBounds(0, 50, 215, 33);
