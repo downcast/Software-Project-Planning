@@ -1,6 +1,6 @@
-import java.awt.EventQueue;
+//import java.awt.EventQueue;
 import java.awt.*;
-import java.awt.event.*;
+//import java.awt.event.*;
 import javax.swing.*;
 
 import javax.swing.JFrame;
@@ -18,15 +18,20 @@ import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.JProgressBar;
+import java.io.File;
+import java.io.FileWriter;
+
 
 public class WelcomeScreen {
 	JDialog input1 = new javax.swing.JDialog();
 	
 
 	private JFrame frmProjectManager;
-	private JTextField textField;
+	private JTextField projectNameField;
 	private JTextField textField_1;
 	private JTextField textField_2;
+	
+	String projectName;
 
 	/**
 	 * Launch the application.
@@ -138,7 +143,6 @@ public class WelcomeScreen {
 			public void actionPerformed(ActionEvent arg0) {
 				RecentProjectPane.setVisible(false);
 				NewProjectPane.setVisible(true);
-				CreateNewProject();
 			}
 		});
 		btnNewProject.setBounds(35, 50, 130, 65);
@@ -184,17 +188,21 @@ public class WelcomeScreen {
 		panel_1.setPreferredSize(new Dimension(609, 2000));
 		
 		
+		
 		JLabel lblprojectName = new JLabel("*Project Name:");
 		lblprojectName.setBounds(0, 50, 215, 33);
 		panel_1.add(lblprojectName);
 		lblprojectName.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		
-		textField = new JTextField();
-		textField.setBounds(137, 50, 239, 26);
-		panel_1.add(textField);
-		textField.setToolTipText("tool tip text sample");
-		textField.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		textField.setColumns(10);
+		projectNameField = new JTextField();
+		projectNameField.setBounds(137, 50, 239, 26);
+		panel_1.add(projectNameField);
+		projectNameField.setToolTipText("tool tip text sample");
+		projectNameField.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		projectNameField.setColumns(10);
+		
+		
+		
 		
 		JScrollPane scrollPane = new JScrollPane(panel_1);
 		
@@ -248,9 +256,10 @@ public class WelcomeScreen {
 	}
 	
 	
-	void CreateNewProject()
+	void EnterInformation()
 	{
-		
+		projectName = projectNameField.getText();
+		File file = new File("" + projectName + ".txt");
 		
 	}
 }
