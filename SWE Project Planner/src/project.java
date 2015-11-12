@@ -1,12 +1,8 @@
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class project implements Serializable{
-	
-	private static final long serialVersionUID = -3965839388062034258L;
-	
-	String owner;
+public class project implements java.io.Serializable{
+	String customer;
 	String title;
 	String description;
 	schedule schedj;
@@ -17,11 +13,11 @@ public class project implements Serializable{
 	Date endDate;
 	
 	//set/get owner
-	void setOwner(String own){
-		owner = own;
+	void setCustomer(String own){
+		customer = own;
 	}
-	String getOwner(){
-		return owner;
+	String getCustomer(){
+		return customer;
 	}
 	
 	//set/get project title
