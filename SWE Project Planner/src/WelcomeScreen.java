@@ -231,6 +231,11 @@ public class WelcomeScreen {
 		textPane.setBounds(174, 185, 212, 78);
 		panel_1.add(textPane);
 		
+		JLabel lblNewChangeWill = new JLabel("New Change Will CHange later");
+		lblNewChangeWill.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblNewChangeWill.setBounds(20, 321, 215, 33);
+		panel_1.add(lblNewChangeWill);
+		
 		scrollPane.setBounds(0, 0, 810, 460);
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		NewProjectPane.add(scrollPane);
