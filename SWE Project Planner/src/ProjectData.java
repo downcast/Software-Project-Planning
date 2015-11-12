@@ -19,7 +19,9 @@ public class ProjectData implements Serializable{
 		try {
 			File file= new File("c:\\TestFileName.xxx");
 			ObjectOutputStream oos= new ObjectOutputStream(new FileOutputStream(file));
-			oos.writeObject(new team());
+			project p = new project();
+			p.setTitle("HEre is the title");
+			oos.writeObject(p);
 			oos.close();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -43,7 +45,12 @@ public class ProjectData implements Serializable{
 					FileInputStream fis= new FileInputStream(listOfFileNames[i]);
 					input = new ObjectInputStream(fis);
 					if (input!= null){
-						//input.readObject();
+						try {
+							System.out.println(((project)input.readObject()).getTitle());
+						} catch (ClassNotFoundException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
 						input.close();
 					}
 				}
