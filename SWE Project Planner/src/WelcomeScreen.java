@@ -114,6 +114,7 @@ public class WelcomeScreen {
 		//aboutFrame.setLocationRelativeTo(this.frmProjectManager);
 	}
 
+	//comment
 	/**
 	 * Initialize the contents of the frame.
 	 */
