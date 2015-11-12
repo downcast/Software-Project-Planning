@@ -20,6 +20,8 @@ import javax.swing.JLabel;
 public class MainWindow {
 
 	private JFrame frmProjectManager;
+	private JTextField projectNameField;
+	private JTextField mainCustomerNameField;
 
 	/**
 	 * Launch the application.
@@ -66,14 +68,12 @@ public class MainWindow {
 		
 		JLayeredPane Requirements = new JLayeredPane();
 		JLayeredPane General = new JLayeredPane();
-		JLayeredPane MainMenu = new JLayeredPane();
 		JLayeredPane EffortMonitoring = new JLayeredPane();
 
 		
 		Requirements.setVisible(false);
 		General.setVisible(false);  
 		EffortMonitoring.setVisible(false);
-		MainMenu.setVisible(true);
 		
 		JPanel panel = new JPanel();
 		panel.setBounds(0, 0, 200, 541);
@@ -117,16 +117,8 @@ public class MainWindow {
 		JButton btnEffortMonitoringAnd = new JButton("Effort Monitoring");
 		btnEffortMonitoringAnd.setBounds(0, 460, 199, 80);
 		panel.add(btnEffortMonitoringAnd);
-		
-		EffortMonitoring.setBounds(200, 0, 815, 541);
-		frmProjectManager.getContentPane().add(EffortMonitoring);
-		EffortMonitoring.setLayout(null);
-		
-		JLabel lblEffortMonitoringandTracking = new JLabel("Effort Monitoring and Tracking");
-		lblEffortMonitoringandTracking.setHorizontalAlignment(SwingConstants.CENTER);
-		lblEffortMonitoringandTracking.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblEffortMonitoringandTracking.setBounds(298, 41, 250, 22);
-		EffortMonitoring.add(lblEffortMonitoringandTracking);
+		JLayeredPane MainMenu = new JLayeredPane();
+		MainMenu.setVisible(true);
 		
 		// ------------------Main Menu-----------------------------------
 		MainMenu.setBounds(200, 0, 815, 541);
@@ -143,6 +135,28 @@ public class MainWindow {
 		welcomeButton.setBounds(40, 80, 150, 50);
 		MainMenu.add(welcomeButton);
 		
+		JLabel lblProjectName = new JLabel("Project Name:");
+		lblProjectName.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblProjectName.setBounds(40, 140, 150, 25);
+		MainMenu.add(lblProjectName);
+		
+		JLabel lblNewLabel = new JLabel("Main Customer's Name:");
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblNewLabel.setBounds(40, 180, 217, 25);
+		MainMenu.add(lblNewLabel);
+		
+		projectNameField = new JTextField();
+		projectNameField.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		projectNameField.setBounds(174, 140, 476, 25);
+		MainMenu.add(projectNameField);
+		projectNameField.setColumns(10);
+		
+		mainCustomerNameField = new JTextField();
+		mainCustomerNameField.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		mainCustomerNameField.setBounds(251, 180, 447, 25);
+		MainMenu.add(mainCustomerNameField);
+		mainCustomerNameField.setColumns(10);
+		
 		welcomeButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//frmProjectManager.setVisible(false);
@@ -151,6 +165,16 @@ public class MainWindow {
 
 			}
 		});
+		
+		EffortMonitoring.setBounds(200, 0, 815, 541);
+		frmProjectManager.getContentPane().add(EffortMonitoring);
+		EffortMonitoring.setLayout(null);
+		
+		JLabel lblEffortMonitoringandTracking = new JLabel("Effort Monitoring and Tracking");
+		lblEffortMonitoringandTracking.setHorizontalAlignment(SwingConstants.CENTER);
+		lblEffortMonitoringandTracking.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblEffortMonitoringandTracking.setBounds(298, 41, 250, 22);
+		EffortMonitoring.add(lblEffortMonitoringandTracking);
 		
 		
 		
