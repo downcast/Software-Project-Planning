@@ -28,6 +28,10 @@ public class MainWindow {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
+					
+					ProjectData p = new ProjectData();
+					p.saveData();
+					p.loadData();
 					MainWindow window = new MainWindow();
 					window.frmProjectManager.setVisible(true);
 				} catch (Exception e) {

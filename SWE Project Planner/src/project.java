@@ -1,7 +1,11 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class project{
+public class project implements Serializable{
+	
+	private static final long serialVersionUID = -3965839388062034258L;
+	
 	String owner;
 	String title;
 	String description;
