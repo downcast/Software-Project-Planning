@@ -1,5 +1,7 @@
 import java.awt.EventQueue;
-import java.awt.Font;
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -23,6 +25,8 @@ public class WelcomeScreen {
 
 	private JFrame frmProjectManager;
 	private JTextField textField;
+	private JTextField textField_1;
+	private JTextField textField_2;
 
 	/**
 	 * Launch the application.
@@ -172,7 +176,13 @@ public class WelcomeScreen {
 		panel_1.setBounds(29, 69, 609, 356);
 		NewProjectPane.add(panel_1);
 		panel_1.setVisible(true);
+		
+		JButton EnterInfoButton = new JButton("Enter Information");
+		EnterInfoButton.setBounds(20, 470, 160, 65);
+		NewProjectPane.add(EnterInfoButton);
 		panel_1.setLayout(null);
+		panel_1.setPreferredSize(new Dimension(609, 2000));
+		
 		
 		JLabel lblprojectName = new JLabel("*Project Name:");
 		lblprojectName.setBounds(0, 50, 215, 33);
@@ -186,18 +196,47 @@ public class WelcomeScreen {
 		textField.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		textField.setColumns(10);
 		
-		JLabel lblNewLabel_2 = new JLabel("New label");
-		lblNewLabel_2.setBounds(102, 160, 56, 16);
-		panel_1.add(lblNewLabel_2);
-		
-		JLabel lblHuge = new JLabel("HUGE");
-		lblHuge.setBounds(0, 500, 607, 354);
-		panel_1.add(lblHuge);
-		lblHuge.setFont(new Font("Tahoma", Font.PLAIN, 96));
-		
 		JScrollPane scrollPane = new JScrollPane(panel_1);
 		
-		scrollPane.setBounds(0, 0, 609, 356);
+		textField_1 = new JTextField();
+		textField_1.setToolTipText("tool tip text sample");
+		textField_1.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		textField_1.setColumns(10);
+		textField_1.setBounds(147, 98, 239, 26);
+		panel_1.add(textField_1);
+		
+		JLabel lblCustomerName = new JLabel("Customer Name:");
+		lblCustomerName.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblCustomerName.setBounds(10, 95, 215, 33);
+		panel_1.add(lblCustomerName);
+		
+		textField_2 = new JTextField();
+		textField_2.setToolTipText("tool tip text sample");
+		textField_2.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		textField_2.setColumns(10);
+		textField_2.setBounds(147, 141, 239, 26);
+		panel_1.add(textField_2);
+		
+		JLabel lblStakeholders = new JLabel("Stakeholders:");
+		lblStakeholders.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblStakeholders.setBounds(10, 141, 215, 33);
+		panel_1.add(lblStakeholders);
+		
+		JLabel lblProjectDescription = new JLabel("Project Description:");
+		lblProjectDescription.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblProjectDescription.setBounds(10, 185, 215, 33);
+		panel_1.add(lblProjectDescription);
+		
+		JTextPane textPane = new JTextPane();
+		textPane.setBounds(174, 185, 212, 78);
+		panel_1.add(textPane);
+		
+		JLabel lblNewChangeWill = new JLabel("New Change Will CHange later");
+		lblNewChangeWill.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblNewChangeWill.setBounds(20, 321, 215, 33);
+		panel_1.add(lblNewChangeWill);
+		
+		scrollPane.setBounds(0, 0, 810, 460);
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		NewProjectPane.add(scrollPane);
 		
