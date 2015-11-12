@@ -29,10 +29,14 @@ public class WelcomeScreen {
 
 	private JFrame frmProjectManager;
 	private JTextField projectNameField;
-	private JTextField textField_1;
-	private JTextField textField_2;
+	private JTextField customerNameField;
+	private JTextField stakeholderField;
+	private JTextPane projectDescriptionField;
 	
 	String projectName;
+	String customerName;
+	String stakeholders;
+	String projectDescription;
 
 	/**
 	 * Launch the application.
@@ -150,18 +154,23 @@ public class WelcomeScreen {
 		btnNewProject.setBounds(35, 50, 130, 65);
 		panel.add(btnNewProject);
 		
-		JButton btnNewButton = new JButton("Open Project");
-		btnNewButton.setBounds(35, 220, 130, 65);
-		panel.add(btnNewButton);
+		JButton openProjectButton = new JButton("Open Project");
+		openProjectButton.setBounds(35, 220, 130, 65);
+		panel.add(openProjectButton);
+		openProjectButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				OpenFile();
+			}
+		});
 		
-		JButton btnNewButton_1 = new JButton("About");
-		btnNewButton_1.addActionListener(new ActionListener() {
+		JButton aboutButton = new JButton("About");
+		aboutButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				LoadAbout();
 			}
 		});
-		btnNewButton_1.setBounds(35, 390, 130, 65);
-		panel.add(btnNewButton_1);
+		aboutButton.setBounds(35, 390, 130, 65);
+		panel.add(aboutButton);
 
 		NewProjectPane.setVisible(false);
 		
@@ -214,24 +223,24 @@ public class WelcomeScreen {
 		
 		JScrollPane scrollPane = new JScrollPane(panel_1);
 		
-		textField_1 = new JTextField();
-		textField_1.setToolTipText("tool tip text sample");
-		textField_1.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		textField_1.setColumns(10);
-		textField_1.setBounds(147, 98, 239, 26);
-		panel_1.add(textField_1);
+		customerNameField = new JTextField();
+		customerNameField.setToolTipText("tool tip text sample");
+		customerNameField.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		customerNameField.setColumns(10);
+		customerNameField.setBounds(147, 98, 239, 26);
+		panel_1.add(customerNameField);
 		
 		JLabel lblCustomerName = new JLabel("Customer Name:");
 		lblCustomerName.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblCustomerName.setBounds(10, 95, 215, 33);
 		panel_1.add(lblCustomerName);
 		
-		textField_2 = new JTextField();
-		textField_2.setToolTipText("tool tip text sample");
-		textField_2.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		textField_2.setColumns(10);
-		textField_2.setBounds(147, 141, 239, 26);
-		panel_1.add(textField_2);
+		stakeholderField = new JTextField();
+		stakeholderField.setToolTipText("tool tip text sample");
+		stakeholderField.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		stakeholderField.setColumns(10);
+		stakeholderField.setBounds(147, 141, 239, 26);
+		panel_1.add(stakeholderField);
 		
 		JLabel lblStakeholders = new JLabel("Stakeholders:");
 		lblStakeholders.setFont(new Font("Tahoma", Font.PLAIN, 18));
@@ -243,9 +252,9 @@ public class WelcomeScreen {
 		lblProjectDescription.setBounds(10, 185, 215, 33);
 		panel_1.add(lblProjectDescription);
 		
-		JTextPane textPane = new JTextPane();
-		textPane.setBounds(174, 185, 212, 78);
-		panel_1.add(textPane);
+		JTextPane projectDescriptionField = new JTextPane();
+		projectDescriptionField.setBounds(174, 185, 212, 78);
+		panel_1.add(projectDescriptionField);
 		
 		JLabel lblNewChangeWill = new JLabel("New Change Will CHange later");
 		lblNewChangeWill.setFont(new Font("Tahoma", Font.PLAIN, 18));
@@ -263,16 +272,36 @@ public class WelcomeScreen {
 		RecentProjectPane.setVisible(true);
 	}
 	
+	void OpenFile()
+	{
+		JFileChooser chooser = new JFileChooser();
+		int returnVal = chooser.showOpenDialog(null);
+	}
 	
 	void EnterInformation()
 	{
 		projectName = projectNameField.getText();
+		customerName = customerNameField.getText();
+		stakeholders = stakeholderField.getText();
+		//projectDescription = projectDescriptionField.getText();
+		
 		File file = new File("" + projectName + ".txt");
 		
 		FileWriter writer = null;
 	    try {
 	        writer = new FileWriter(file);
-	        writer.write("test");
+	        
+	        writer.write("test \n "
+	        		+ "Project Name: " + projectName + ".                 "
+	        		+ "Customer's Name: " + customerName + ".                 "
+	        		+ "Stakeholders: " + stakeholders + ".                 "
+	        		//+ "Project Description: " + projectDescription + ". \n"
+	        		
+	        		
+	        		
+	        		
+	        		);
+	        
 	    } catch (IOException e) {
 	        e.printStackTrace(); // I'd rather declare method with throws IOException and omit this catch.
 	    } finally {
