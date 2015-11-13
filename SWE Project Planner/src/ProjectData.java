@@ -20,7 +20,7 @@ public class ProjectData{
 
 		try {
 			//File file = new File("Summer in New York");
-			ObjectOutputStream oos= new ObjectOutputStream(new FileOutputStream((p.getTitle() + ".virus").toString()));
+			ObjectOutputStream oos= new ObjectOutputStream(new FileOutputStream((p.getTitle() + ".pjm").toString()));
 			oos.writeObject(p);
 			oos.close();
 		} catch (FileNotFoundException e) {
@@ -33,7 +33,7 @@ public class ProjectData{
 	public void loadData(){
 		
 		try{ 
-			FileInputStream door = new FileInputStream((p.getTitle() + ".virus").toString()); 
+			FileInputStream door = new FileInputStream((p.getTitle() + ".pjm").toString()); 
 			ObjectInputStream reader = new ObjectInputStream(door);
 			project x = new project();
 			x = (project) reader.readObject(); 

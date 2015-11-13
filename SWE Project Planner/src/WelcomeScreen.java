@@ -285,7 +285,12 @@ public class WelcomeScreen {
 		stakeholders = stakeholderField.getText();
 		//projectDescription = projectDescriptionField.getText();
 		
-		File file = new File("" + projectName + ".txt");
+		project project = new project();
+		project.setTitle(projectName);
+		project.setCustomer(customerName);
+		//project.set
+		
+		/*File file = new File("" + projectName + ".txt");
 		
 		FileWriter writer = null;
 	    try {
@@ -307,7 +312,7 @@ public class WelcomeScreen {
 	    } finally {
 	        if (writer != null) try { writer.close(); } catch (IOException ignore) {}
 	    }
-	    System.out.printf("File is located at %s%n", file.getAbsolutePath());
+	    System.out.printf("File is located at %s%n", file.getAbsolutePath());*/
 		
 	}
 }
