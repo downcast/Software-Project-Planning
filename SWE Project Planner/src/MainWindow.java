@@ -65,10 +65,10 @@ public class MainWindow {
 		frmProjectManager.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmProjectManager.getContentPane().setLayout(null);
 		
-		
 		JLayeredPane Requirements = new JLayeredPane();
 		JLayeredPane General = new JLayeredPane();
 		JLayeredPane EffortMonitoring = new JLayeredPane();
+		JLayeredPane MainMenu = new JLayeredPane();
 
 		
 		Requirements.setVisible(false);
@@ -117,7 +117,6 @@ public class MainWindow {
 		JButton btnEffortMonitoringAnd = new JButton("Effort Monitoring");
 		btnEffortMonitoringAnd.setBounds(0, 460, 199, 80);
 		panel.add(btnEffortMonitoringAnd);
-		JLayeredPane MainMenu = new JLayeredPane();
 		MainMenu.setVisible(true);
 		
 		// ------------------Main Menu-----------------------------------
