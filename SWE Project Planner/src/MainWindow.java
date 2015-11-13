@@ -69,6 +69,8 @@ public class MainWindow {
 		JLayeredPane General = new JLayeredPane();
 		JLayeredPane EffortMonitoring = new JLayeredPane();
 		JLayeredPane MainMenu = new JLayeredPane();
+		
+		//test
 
 		
 		Requirements.setVisible(false);
@@ -197,7 +199,7 @@ public class MainWindow {
 		
 		
 		//-----------------------------------------------------------------
-		
+
 		
 		Requirements.setBounds(200, 0, 815, 541);
 		frmProjectManager.getContentPane().add(Requirements);
