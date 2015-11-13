@@ -30,10 +30,6 @@ public class MainWindow {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					
-					ProjectData p = new ProjectData();
-					p.saveData();
-					p.loadData();
 					MainWindow window = new MainWindow();
 					window.frmProjectManager.setVisible(true);
 				} catch (Exception e) {
@@ -64,6 +60,7 @@ public class MainWindow {
 		frmProjectManager.setBounds(100, 100, 1024, 576);
 		frmProjectManager.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmProjectManager.getContentPane().setLayout(null);
+		frmProjectManager.setVisible(true);
 		
 		JLayeredPane Requirements = new JLayeredPane();
 		JLayeredPane General = new JLayeredPane();

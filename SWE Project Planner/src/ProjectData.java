@@ -14,7 +14,7 @@ public class ProjectData{
 		p.setTitle("Here is the title");
 	}
 	
-	public void saveData(){
+	public void saveData(project p){
 		//SpeechWriterObjHolder SWOH= new SpeechWriterObjHolder();
 		//SpeechWriterObj sw= SWOH.getCurrentSpeechObj();
 
@@ -33,7 +33,7 @@ public class ProjectData{
 	public void loadData(){
 		
 		try{ 
-			FileInputStream door = new FileInputStream((p.getTitle() + ".pjm").toString()); 
+			FileInputStream door = new FileInputStream((p.getTitle() + ".virus").toString()); 
 			ObjectInputStream reader = new ObjectInputStream(door);
 			project x = new project();
 			x = (project) reader.readObject(); 

@@ -283,12 +283,23 @@ public class WelcomeScreen {
 		projectName = projectNameField.getText();
 		customerName = customerNameField.getText();
 		stakeholders = stakeholderField.getText();
+		
+		
 		//projectDescription = projectDescriptionField.getText();
 		
 		project project = new project();
 		project.setTitle(projectName);
 		project.setCustomer(customerName);
-		//project.set
+		
+		
+		
+		
+		
+		
+		
+		
+		frmProjectManager.dispose();
+		MainWindow mw = new MainWindow();
 		
 		/*File file = new File("" + projectName + ".txt");
 		
