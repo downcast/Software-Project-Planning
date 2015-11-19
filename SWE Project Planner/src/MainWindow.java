@@ -241,4 +241,6 @@ public class MainWindow {
 		projectNameField.setText(fileScan.nextLine());
 		mainCustomerNameField.setText(fileScan.nextLine());
 	}
+	
+	
 }

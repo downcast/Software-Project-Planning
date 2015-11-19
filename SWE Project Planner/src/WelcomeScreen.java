@@ -42,6 +42,7 @@ public class WelcomeScreen {
 	/**
 	 * Launch the application.
 	 */
+	public static project currentProject;
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -132,6 +133,8 @@ public class WelcomeScreen {
 		frmProjectManager.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);//DISPOSE_ON_CLOSE);
 		frmProjectManager.getContentPane().setLayout(null);
 		frmProjectManager.setVisible(true);
+		
+		ProjectData projData = new ProjectData();
 		
 		JLayeredPane RecentProjectPane = new JLayeredPane();
 		JLayeredPane NewProjectPane = new JLayeredPane();

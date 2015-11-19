@@ -4,6 +4,7 @@ import java.util.Date;
 public class project implements java.io.Serializable{
 	String customer;
 	String title;
+	ArrayList<person> stakeholders;
 	String description;
 	schedule schedj;
 	ArrayList<team> responsibleTeams = new ArrayList<team>();
