@@ -41,6 +41,7 @@ public class WelcomeScreen {
 	/**
 	 * Launch the application.
 	 */
+	public static project currentProject;
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {

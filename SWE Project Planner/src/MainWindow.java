@@ -218,4 +218,6 @@ public class MainWindow {
 		btnRequirements.setBounds(0, 345, 199, 80);
 		panel.add(btnRequirements);
 	}
+	
+	
 }
