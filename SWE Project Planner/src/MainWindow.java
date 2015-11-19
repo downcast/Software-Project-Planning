@@ -80,13 +80,15 @@ public class MainWindow {
 		frmProjectManager.getContentPane().add(panel);
 		panel.setLayout(null);
 		
-		JButton btnNewButton = new JButton("Back");
-		btnNewButton.addActionListener(new ActionListener() {
+		JButton WelcomeScreenBtnSide = new JButton("Welcome Screen");
+		WelcomeScreenBtnSide.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				frmProjectManager.dispose();
+				WelcomeScreen ws = new WelcomeScreen();
 			}
 		});
-		btnNewButton.setBounds(0, 0, 199, 80);
-		panel.add(btnNewButton);
+		WelcomeScreenBtnSide.setBounds(0, 0, 199, 80);
+		panel.add(WelcomeScreenBtnSide);
 		
 		JButton btnNewButton_1 = new JButton("Main Menu ");
 		btnNewButton_1.addActionListener(new ActionListener() {
@@ -129,10 +131,6 @@ public class MainWindow {
 		lblMainMenu.setBounds(351, 41, 168, 22);
 		MainMenu.add(lblMainMenu);
 		
-		JButton welcomeButton = new JButton("Welcome Screen");
-		welcomeButton.setBounds(40, 80, 150, 50);
-		MainMenu.add(welcomeButton);
-		
 		JLabel lblProjectName = new JLabel("Project Name:");
 		lblProjectName.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblProjectName.setBounds(40, 140, 150, 25);
@@ -154,15 +152,6 @@ public class MainWindow {
 		mainCustomerNameField.setBounds(251, 180, 447, 25);
 		MainMenu.add(mainCustomerNameField);
 		mainCustomerNameField.setColumns(10);
-		
-		welcomeButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				//frmProjectManager.setVisible(false);
-				frmProjectManager.dispose();
-				WelcomeScreen ws = new WelcomeScreen();
-
-			}
-		});
 		
 		EffortMonitoring.setBounds(200, 0, 815, 541);
 		frmProjectManager.getContentPane().add(EffortMonitoring);
