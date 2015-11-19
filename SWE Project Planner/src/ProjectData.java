@@ -33,7 +33,7 @@ public class ProjectData{
 	public void loadData(){
 		
 		try{ 
-			FileInputStream door = new FileInputStream((p.getTitle() + ".virus").toString()); 
+			FileInputStream door = new FileInputStream((p.getTitle() + ".pjm").toString()); 
 			ObjectInputStream reader = new ObjectInputStream(door);
 			project x = new project();
 			x = (project) reader.readObject(); 

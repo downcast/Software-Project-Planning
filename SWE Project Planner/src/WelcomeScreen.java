@@ -132,6 +132,8 @@ public class WelcomeScreen {
 		frmProjectManager.getContentPane().setLayout(null);
 		frmProjectManager.setVisible(true);
 		
+		ProjectData projData = new ProjectData();
+		
 		JLayeredPane RecentProjectPane = new JLayeredPane();
 		JLayeredPane NewProjectPane = new JLayeredPane();
 		RecentProjectPane.setVisible(true);
