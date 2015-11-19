@@ -309,6 +309,7 @@ public class WelcomeScreen {
 	        	writer.write(projectName);
 	        	writer.write(String.format("%n"));
 	        	writer.write(customerName);	
+	        	//line needed to push
 	        
 	    	} catch (IOException e) {
 	        	e.printStackTrace(); // I'd rather declare method with throws IOException and omit this catch.
