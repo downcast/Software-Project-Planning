@@ -5,6 +5,7 @@ import java.awt.Window.Type;
 import javax.swing.JPanel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.util.Scanner;
 import java.awt.event.ActionEvent;
 import javax.swing.JSeparator;
 import javax.swing.SwingConstants;
@@ -16,12 +17,14 @@ import javax.swing.JLayeredPane;
 import javax.swing.JTextField;
 import java.awt.Font;
 import javax.swing.JLabel;
+import java.io.*;
 
 public class MainWindow {
 
 	private JFrame frmProjectManager;
 	private JTextField projectNameField;
 	private JTextField mainCustomerNameField;
+	String fileToLoad;
 
 	/**
 	 * Launch the application.
@@ -30,7 +33,7 @@ public class MainWindow {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					MainWindow window = new MainWindow();
+					MainWindow window = new MainWindow("default.txt");
 					window.frmProjectManager.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -42,8 +45,11 @@ public class MainWindow {
 	//comment
 	/**
 	 * Create the application.
+	 * @throws IOException 
 	 */
-	public MainWindow() {
+	public MainWindow(String fileName) throws IOException 
+	{
+		fileToLoad = fileName;
 		initialize();
 	}
 	
@@ -51,8 +57,13 @@ public class MainWindow {
 
 	/**
 	 * Initialize the contents of the frame.
+	 * @throws IOException 
 	 */
-	private void initialize() {
+	private void initialize() throws IOException 
+	{
+		
+		
+		
 		frmProjectManager = new JFrame();
 		frmProjectManager.setResizable(false);
 		frmProjectManager.setTitle("Project Manager 2016");
@@ -67,7 +78,7 @@ public class MainWindow {
 		JLayeredPane EffortMonitoring = new JLayeredPane();
 		JLayeredPane MainMenu = new JLayeredPane();
 		
-		//test
+		
 
 		
 		Requirements.setVisible(false);
@@ -142,6 +153,7 @@ public class MainWindow {
 		MainMenu.add(lblNewLabel);
 		
 		projectNameField = new JTextField();
+		projectNameField.setText("Project Name goes here");
 		projectNameField.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		projectNameField.setBounds(174, 140, 476, 25);
 		MainMenu.add(projectNameField);
@@ -217,5 +229,16 @@ public class MainWindow {
 		});
 		btnRequirements.setBounds(0, 345, 199, 80);
 		panel.add(btnRequirements);
+		
+		
+		loadProject(fileToLoad);
+	}
+	
+	public void loadProject(String fileName) throws IOException
+	{
+		File temp = new File(fileToLoad);
+		Scanner fileScan = new Scanner(temp);
+		projectNameField.setText(fileScan.nextLine());
+		mainCustomerNameField.setText(fileScan.nextLine());
 	}
 }

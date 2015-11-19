@@ -18,8 +18,7 @@ import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.JProgressBar;
-import java.io.File;
-import java.io.FileWriter;
+
 import java.io.*;
 
 
@@ -32,6 +31,8 @@ public class WelcomeScreen {
 	private JTextField customerNameField;
 	private JTextField stakeholderField;
 	private JTextPane projectDescriptionField;
+	
+	public boolean serializedComplete = false;
 	
 	String projectName;
 	String customerName;
@@ -200,7 +201,12 @@ public class WelcomeScreen {
 		
 		EnterInfoButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				EnterInformation();
+				try {
+					EnterInformation();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		
@@ -278,7 +284,7 @@ public class WelcomeScreen {
 		int returnVal = chooser.showOpenDialog(null);
 	}
 	
-	void EnterInformation()
+	void EnterInformation() throws IOException
 	{
 		projectName = projectNameField.getText();
 		customerName = customerNameField.getText();
@@ -290,40 +296,29 @@ public class WelcomeScreen {
 		project project = new project();
 		project.setTitle(projectName);
 		project.setCustomer(customerName);
+
 		
+		if (!serializedComplete)
+		{
+			File file = new File("" + projectName + ".txt");
 		
-		
-		
-		
-		
-		
-		
-		frmProjectManager.dispose();
-		MainWindow mw = new MainWindow();
-		
-		/*File file = new File("" + projectName + ".txt");
-		
-		FileWriter writer = null;
-	    try {
-	        writer = new FileWriter(file);
+		 FileWriter writer = null;
+	    	try {
+	        	writer = new FileWriter(file);
 	        
-	        writer.write("test \n "
-	        		+ "Project Name: " + projectName + ".                 "
-	        		+ "Customer's Name: " + customerName + ".                 "
-	        		+ "Stakeholders: " + stakeholders + ".                 "
-	        		//+ "Project Description: " + projectDescription + ". \n"
-	        		
-	        		
-	        		
-	        		
-	        		);
+	        	writer.write(projectName);
+	        	writer.write(String.format("%n"));
+	        	writer.write(customerName);	
 	        
-	    } catch (IOException e) {
-	        e.printStackTrace(); // I'd rather declare method with throws IOException and omit this catch.
-	    } finally {
-	        if (writer != null) try { writer.close(); } catch (IOException ignore) {}
-	    }
-	    System.out.printf("File is located at %s%n", file.getAbsolutePath());*/
-		
+	    	} catch (IOException e) {
+	        	e.printStackTrace(); // I'd rather declare method with throws IOException and omit this catch.
+	    	} finally {
+	        	if (writer != null) try { writer.close(); } catch (IOException ignore) {}
+	    	}
+	    	System.out.printf("File is located at %s%n", file.getAbsolutePath());  
+	    	
+			frmProjectManager.dispose();
+			MainWindow mw = new MainWindow(projectName + ".txt");
+		}
 	}
 }
