@@ -7,20 +7,10 @@ import java.io.ObjectOutputStream;
 
 public class ProjectData{
 	
-	project p;
-	
-	ProjectData(){
-		p = new project();
-		p.setTitle("Here is the title");
-	}
-	
 	public void saveData(project p){
-		//SpeechWriterObjHolder SWOH= new SpeechWriterObjHolder();
-		//SpeechWriterObj sw= SWOH.getCurrentSpeechObj();
 
 		try {
-			//File file = new File("Summer in New York");
-			ObjectOutputStream oos= new ObjectOutputStream(new FileOutputStream((p.getTitle() + ".pjm").toString()));
+			ObjectOutputStream oos= new ObjectOutputStream(new FileOutputStream((p.getTitle() + ".xxxVirus").toString()));
 			oos.writeObject(p);
 			oos.close();
 		} catch (FileNotFoundException e) {
@@ -30,14 +20,15 @@ public class ProjectData{
 		}
 	}
 	
-	public void loadData(){
+	public project loadData(String fileName){
+		
+		project x = new project();
 		
 		try{ 
-			FileInputStream door = new FileInputStream((p.getTitle() + ".pjm").toString()); 
+			FileInputStream door = new FileInputStream(fileName); 
 			ObjectInputStream reader = new ObjectInputStream(door);
-			project x = new project();
-			x = (project) reader.readObject(); 
-			System.out.println(x.getTitle());
+			
+			x = (project) reader.readObject();
 		}
 		catch (IOException e){ 
 			e.printStackTrace();
@@ -45,5 +36,7 @@ public class ProjectData{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		return x;
 	}
 }

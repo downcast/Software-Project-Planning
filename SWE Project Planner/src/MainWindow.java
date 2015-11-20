@@ -1,23 +1,22 @@
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
-import java.awt.Window.Type;
 import javax.swing.JPanel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.util.Scanner;
 import java.awt.event.ActionEvent;
-import javax.swing.JSeparator;
 import javax.swing.SwingConstants;
 import javax.swing.border.BevelBorder;
 import java.awt.Color;
-import javax.swing.JPasswordField;
-import java.awt.Toolkit;
 import javax.swing.JLayeredPane;
 import javax.swing.JTextField;
 import java.awt.Font;
 import javax.swing.JLabel;
 import java.io.*;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.ScrollPaneConstants;
 
 public class MainWindow {
 
@@ -25,6 +24,7 @@ public class MainWindow {
 	private JTextField projectNameField;
 	private JTextField mainCustomerNameField;
 	String fileToLoad;
+	String state = "Edit";
 
 	/**
 	 * Launch the application.
@@ -42,7 +42,6 @@ public class MainWindow {
 		});
 	}
 
-	//comment
 	/**
 	 * Create the application.
 	 * @throws IOException 
@@ -53,16 +52,11 @@ public class MainWindow {
 		initialize();
 	}
 	
-	
-
 	/**
 	 * Initialize the contents of the frame.
 	 * @throws IOException 
 	 */
-	private void initialize() throws IOException 
-	{
-		
-		
+	private void initialize() throws IOException {
 		
 		frmProjectManager = new JFrame();
 		frmProjectManager.setResizable(false);
@@ -72,16 +66,9 @@ public class MainWindow {
 		frmProjectManager.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmProjectManager.getContentPane().setLayout(null);
 		frmProjectManager.setVisible(true);
-		
-		JLayeredPane Requirements = new JLayeredPane();
 		JLayeredPane General = new JLayeredPane();
 		JLayeredPane EffortMonitoring = new JLayeredPane();
 		JLayeredPane MainMenu = new JLayeredPane();
-		
-		
-
-		
-		Requirements.setVisible(false);
 		General.setVisible(false);  
 		EffortMonitoring.setVisible(false);
 		
@@ -98,8 +85,15 @@ public class MainWindow {
 				WelcomeScreen ws = new WelcomeScreen();
 			}
 		});
+		
 		WelcomeScreenBtnSide.setBounds(0, 0, 199, 80);
 		panel.add(WelcomeScreenBtnSide);
+		
+		JLayeredPane Requirements = new JLayeredPane();
+		Requirements.setVisible(false);
+		Requirements.setBounds(200, 0, 815, 541);
+		frmProjectManager.getContentPane().add(Requirements);
+		Requirements.setLayout(null);
 		
 		JButton btnNewButton_1 = new JButton("Main Menu ");
 		btnNewButton_1.addActionListener(new ActionListener() {
@@ -110,6 +104,7 @@ public class MainWindow {
 				MainMenu.setVisible(true);
 			}
 		});
+		
 		btnNewButton_1.setBounds(0, 115, 199, 80);
 		panel.add(btnNewButton_1);
 		
@@ -122,14 +117,126 @@ public class MainWindow {
 				General.setVisible(true);
 			}
 		});
+		
 		btnNewButton_2.setBounds(0, 230, 199, 80);
 		panel.add(btnNewButton_2);
-		
 		
 		JButton btnEffortMonitoringAnd = new JButton("Effort Monitoring");
 		btnEffortMonitoringAnd.setBounds(0, 460, 199, 80);
 		panel.add(btnEffortMonitoringAnd);
 		MainMenu.setVisible(true);
+		
+		JLabel lblRequirements = new JLabel("Requirements");
+		lblRequirements.setHorizontalAlignment(SwingConstants.CENTER);
+		lblRequirements.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblRequirements.setBounds(351, 41, 168, 22);
+		Requirements.add(lblRequirements);
+		
+		JPanel functionalPane = new JPanel();
+		functionalPane.setLayout(null);
+		functionalPane.setBounds(407, 70, 407, 471);
+		Requirements.add(functionalPane);
+		
+		JLabel functionalLabel = new JLabel("Functional");
+		functionalLabel.setBounds(165, 5, 77, 14);
+		functionalPane.add(functionalLabel);
+		
+		JButton functionalAdd = new JButton("Add");
+		functionalAdd.setVisible(false);
+		functionalAdd.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		
+		functionalAdd.setBounds(10, 35, 89, 23);
+		functionalPane.add(functionalAdd);
+		
+		JButton functionalRemove = new JButton("Remove");
+		functionalRemove.setVisible(false);
+		functionalRemove.setBounds(109, 35, 89, 23);
+		functionalPane.add(functionalRemove);
+		
+		JButton functionalEdit = new JButton(state);
+		functionalEdit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (functionalEdit.getText().equalsIgnoreCase("View")){
+					state = "Edit";
+					functionalEdit.setText(state);
+					functionalAdd.setVisible(false);
+					functionalRemove.setVisible(false);
+				} else {
+					state = "View";
+					functionalEdit.setText(state);
+					functionalAdd.setVisible(true);
+					functionalRemove.setVisible(true);
+				}
+			}
+		});
+		functionalEdit.setBounds(308, 35, 89, 23);
+		functionalPane.add(functionalEdit);
+		
+		JScrollPane functionalScrollPane = new JScrollPane();
+		functionalScrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		functionalScrollPane.setBounds(0, 70, 407, 401);
+		functionalPane.add(functionalScrollPane);
+		
+		JPanel functionalScrollPanePanel = new JPanel();
+		functionalScrollPane.setViewportView(functionalScrollPanePanel);
+		
+		JPanel nonFunctionalPane = new JPanel();
+		nonFunctionalPane.setBounds(0, 70, 407, 471);
+		Requirements.add(nonFunctionalPane);
+		nonFunctionalPane.setLayout(null);
+		
+		JLabel lblNonfuncctional = new JLabel("Non-Functional");
+		lblNonfuncctional.setBounds(165, 5, 77, 14);
+		nonFunctionalPane.add(lblNonfuncctional);
+		
+		JButton nonFunctionalAdd = new JButton("Add");
+		nonFunctionalAdd.setVisible(false);
+		nonFunctionalAdd.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		
+		nonFunctionalAdd.setBounds(10, 35, 89, 23);
+		nonFunctionalPane.add(nonFunctionalAdd);
+		
+		JButton nonFunctionalRemove = new JButton("Remove");
+		nonFunctionalRemove.setVisible(false);
+		nonFunctionalRemove.setBounds(109, 35, 89, 23);
+		nonFunctionalPane.add(nonFunctionalRemove);
+		
+		JButton nonFunctionalEdit = new JButton(state);
+		nonFunctionalEdit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (nonFunctionalEdit.getText().equalsIgnoreCase("View")){
+					state = "Edit";
+					nonFunctionalEdit.setText(state);
+					nonFunctionalAdd.setVisible(false);
+					nonFunctionalRemove.setVisible(false);
+				} else {
+					state = "View";
+					nonFunctionalEdit.setText(state);
+					nonFunctionalAdd.setVisible(true);
+					nonFunctionalRemove.setVisible(true);
+				}
+			}
+		});
+		nonFunctionalEdit.setBounds(308, 35, 89, 23);
+		nonFunctionalPane.add(nonFunctionalEdit);
+		
+		JScrollPane nonFunctionalScrollPane = new JScrollPane();
+		nonFunctionalScrollPane.setBounds(0, 70, 407, 401);
+		nonFunctionalScrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		nonFunctionalPane.add(nonFunctionalScrollPane);
+		
+		JPanel nonFunctionalScrollPanePanel = new JPanel();
+		nonFunctionalScrollPane.setViewportView(nonFunctionalScrollPanePanel);
+		
+		JPanel panel_1 = new JPanel();
+		panel_1.setBounds(200, 0, 815, 541);
+		frmProjectManager.getContentPane().add(panel_1);
 		
 		// ------------------Main Menu-----------------------------------
 		MainMenu.setBounds(200, 0, 815, 541);
@@ -193,22 +300,6 @@ public class MainWindow {
 		lblGeneral.setBounds(351, 41, 168, 22);
 		General.add(lblGeneral);
 		
-		
-		
-		
-		//-----------------------------------------------------------------
-
-		
-		Requirements.setBounds(200, 0, 815, 541);
-		frmProjectManager.getContentPane().add(Requirements);
-		Requirements.setLayout(null);
-		
-		JLabel lblRequirements = new JLabel("Requirements");
-		lblRequirements.setHorizontalAlignment(SwingConstants.CENTER);
-		lblRequirements.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblRequirements.setBounds(351, 41, 168, 22);
-		Requirements.add(lblRequirements);
-		
 		btnEffortMonitoringAnd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Requirements.setVisible(false);
@@ -240,7 +331,13 @@ public class MainWindow {
 		Scanner fileScan = new Scanner(temp);
 		projectNameField.setText(fileScan.nextLine());
 		mainCustomerNameField.setText(fileScan.nextLine());
+		fileScan.close();
 	}
 	
+	public void addRequirement(JPanel panel){
+		//JTextArea textArea
+		
+		//panel.add
+	}
 	
 }

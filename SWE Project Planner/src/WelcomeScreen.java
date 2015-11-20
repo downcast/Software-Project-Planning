@@ -8,6 +8,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.BevelBorder;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -34,6 +35,8 @@ public class WelcomeScreen {
 	
 	public boolean serializedComplete = false;
 	
+	ProjectData projData;
+	
 	String projectName;
 	String customerName;
 	String stakeholders;
@@ -43,6 +46,7 @@ public class WelcomeScreen {
 	 * Launch the application.
 	 */
 	public static project currentProject;
+	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -134,8 +138,6 @@ public class WelcomeScreen {
 		frmProjectManager.getContentPane().setLayout(null);
 		frmProjectManager.setVisible(true);
 		
-		ProjectData projData = new ProjectData();
-		
 		JLayeredPane RecentProjectPane = new JLayeredPane();
 		JLayeredPane NewProjectPane = new JLayeredPane();
 		RecentProjectPane.setVisible(true);
@@ -146,6 +148,8 @@ public class WelcomeScreen {
 		panel.setBounds(0, 0, 200, 541);
 		frmProjectManager.getContentPane().add(panel);
 		panel.setLayout(null);
+		
+		projData = new ProjectData();
 		
 		//-------------New Project-------------------
 		JButton btnNewProject = new JButton("New Project");
@@ -284,11 +288,34 @@ public class WelcomeScreen {
 	void OpenFile()
 	{
 		JFileChooser chooser = new JFileChooser();
+		// Puts it at the project directory
+		chooser.setCurrentDirectory(new File("."));
+		// Looks only at txt files
+		FileNameExtensionFilter filter = new FileNameExtensionFilter("Project files (*.xxxVirus)", "xxxVirus");
+		chooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+		
+		chooser.setFileFilter(filter);
 		int returnVal = chooser.showOpenDialog(null);
+		
+		if (returnVal == JFileChooser.APPROVE_OPTION) {
+            File file = chooser.getSelectedFile();
+            
+            project p = new project();
+            p = projData.loadData(file.getName());
+            
+            System.out.println(p.getTitle());
+        } 
+		
 	}
 	
 	void EnterInformation() throws IOException
 	{
+		project p = new project();
+		p.setTitle("Your mother");
+		
+		projData.saveData(p);
+		
+		
 		projectName = projectNameField.getText();
 		customerName = customerNameField.getText();
 		stakeholders = stakeholderField.getText();
