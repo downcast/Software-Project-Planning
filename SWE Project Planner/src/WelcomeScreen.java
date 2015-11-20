@@ -2,28 +2,17 @@
 import java.awt.*;
 //import java.awt.event.*;
 import javax.swing.*;
-
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.SwingConstants;
 import javax.swing.border.BevelBorder;
+import javax.swing.text.BadLocationException;
+import java.awt.event.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import javax.swing.JLayeredPane;
-import javax.swing.JDialog;
-import javax.swing.JTextField;
-import javax.swing.JScrollBar;
-import javax.swing.JScrollPane;
-import javax.swing.ScrollPaneConstants;
-import javax.swing.JProgressBar;
-
 import java.io.*;
 
 
-public class WelcomeScreen {
+public class WelcomeScreen {  //asdasd
 	JDialog input1 = new javax.swing.JDialog();
 	
 
@@ -31,7 +20,9 @@ public class WelcomeScreen {
 	private JTextField projectNameField;
 	private JTextField customerNameField;
 	private JTextField stakeholderField;
-	private JTextPane projectDescriptionField;
+	private JTextPane projectDescriptionPane;
+	private JTextArea description;
+	private JTextArea teamMembers;
 	
 	public boolean serializedComplete = false;
 	
@@ -41,6 +32,8 @@ public class WelcomeScreen {
 	String customerName;
 	String stakeholders;
 	String projectDescription;
+	String textArea;
+	String teamMembersText;
 
 	/**
 	 * Launch the application.
@@ -122,6 +115,9 @@ public class WelcomeScreen {
 		lblNewLabel_1.setBounds(146, 224, 56, 16);
 		af.getContentPane().add(lblNewLabel_1);
 		
+		description.getDocument().putProperty("filterNewlines", true);
+
+		
 		//aboutFrame.setLocationRelativeTo(this.frmProjectManager);
 	}
 
@@ -137,6 +133,8 @@ public class WelcomeScreen {
 		frmProjectManager.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);//DISPOSE_ON_CLOSE);
 		frmProjectManager.getContentPane().setLayout(null);
 		frmProjectManager.setVisible(true);
+		
+		//description.getInputMap().put(KeyStroke.getKeyStroke("ENTER"), "doNothing");
 		
 		JLayeredPane RecentProjectPane = new JLayeredPane();
 		JLayeredPane NewProjectPane = new JLayeredPane();
@@ -186,15 +184,6 @@ public class WelcomeScreen {
 		frmProjectManager.getContentPane().add(NewProjectPane);
 		NewProjectPane.setLayout(null);
 		
-		
-		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		
-		JLabel lblEnterWhatYou = new JLabel("Enter What You Know");
-		lblEnterWhatYou.setBounds(0, 0, 815, 60);
-		lblEnterWhatYou.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblEnterWhatYou.setHorizontalAlignment(SwingConstants.CENTER);
-		NewProjectPane.add(lblEnterWhatYou);
-		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBounds(29, 69, 609, 356);
 		NewProjectPane.add(panel_1);
@@ -225,7 +214,7 @@ public class WelcomeScreen {
 		lblprojectName.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		
 		projectNameField = new JTextField();
-		projectNameField.setBounds(137, 50, 239, 26);
+		projectNameField.setBounds(137, 50, 469, 26);
 		panel_1.add(projectNameField);
 		projectNameField.setToolTipText("tool tip text sample");
 		projectNameField.setFont(new Font("Tahoma", Font.PLAIN, 18));
@@ -240,7 +229,7 @@ public class WelcomeScreen {
 		customerNameField.setToolTipText("tool tip text sample");
 		customerNameField.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		customerNameField.setColumns(10);
-		customerNameField.setBounds(147, 98, 239, 26);
+		customerNameField.setBounds(147, 98, 459, 26);
 		panel_1.add(customerNameField);
 		
 		JLabel lblCustomerName = new JLabel("Customer Name:");
@@ -252,7 +241,7 @@ public class WelcomeScreen {
 		stakeholderField.setToolTipText("tool tip text sample");
 		stakeholderField.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		stakeholderField.setColumns(10);
-		stakeholderField.setBounds(147, 141, 239, 26);
+		stakeholderField.setBounds(147, 141, 459, 26);
 		panel_1.add(stakeholderField);
 		
 		JLabel lblStakeholders = new JLabel("Stakeholders:");
@@ -265,14 +254,73 @@ public class WelcomeScreen {
 		lblProjectDescription.setBounds(10, 185, 215, 33);
 		panel_1.add(lblProjectDescription);
 		
-		JTextPane projectDescriptionField = new JTextPane();
-		projectDescriptionField.setBounds(174, 185, 212, 78);
-		panel_1.add(projectDescriptionField);
+		description = new JTextArea();
+		description.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) 
+			{
+				if (e.getKeyCode() == KeyEvent.VK_ENTER)
+				{
+					e.consume();
+				}
+			}
+			
+			@Override
+			public void keyReleased(KeyEvent e) 
+			{
+				if (e.getKeyCode() == KeyEvent.VK_ENTER)
+				{
+					e.consume();
+				}
+			}
+		});
+		description.setWrapStyleWord(true);
+		description.setLineWrap(true);
+		description.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		description.setText("New change New CHange");
+		description.setBounds(183, 187, 423, 230);
+		panel_1.add(description);
 		
-		JLabel lblNewChangeWill = new JLabel("New Change Will CHange later");
-		lblNewChangeWill.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblNewChangeWill.setBounds(20, 321, 215, 33);
-		panel_1.add(lblNewChangeWill);
+		JLabel lblTeamMembers = new JLabel("Team Members:");
+		lblTeamMembers.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblTeamMembers.setBounds(10, 454, 215, 33);
+		panel_1.add(lblTeamMembers);
+		
+		teamMembers = new JTextArea();
+		teamMembers.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) 
+			{
+				if (e.getKeyCode() == KeyEvent.VK_ENTER)
+				{
+					e.consume();
+				}
+			}
+			
+			@Override
+			public void keyReleased(KeyEvent e) 
+			{
+				if (e.getKeyCode() == KeyEvent.VK_ENTER)
+				{
+					e.consume();
+				}
+			}
+		});
+		teamMembers.setWrapStyleWord(true);
+		teamMembers.setText("New change New CHange");
+		teamMembers.setLineWrap(true);
+		teamMembers.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		teamMembers.setBounds(183, 454, 423, 176);
+		panel_1.add(teamMembers);
+		
+		
+		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		
+		JLabel lblEnterWhatYou = new JLabel("Enter What You Know");
+		lblEnterWhatYou.setBounds(0, 0, 815, 60);
+		panel_1.add(lblEnterWhatYou);
+		lblEnterWhatYou.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblEnterWhatYou.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		scrollPane.setBounds(0, 0, 810, 460);
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
@@ -301,7 +349,7 @@ public class WelcomeScreen {
             File file = chooser.getSelectedFile();
             
             project p = new project();
-            p = projData.loadData(file.getName());
+            //p = projData.loadData(file.getName());
             
             System.out.println(p.getTitle());
         } 
@@ -319,14 +367,25 @@ public class WelcomeScreen {
 		projectName = projectNameField.getText();
 		customerName = customerNameField.getText();
 		stakeholders = stakeholderField.getText();
+		//projectDescription = projectDescriptionPane.getText();
+		int len = description.getDocument().getLength();
+		teamMembersText = teamMembers.getText();
+		
+		try {
+			textArea = description.getText(0, len);
+		} catch (BadLocationException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		
 		
 		//projectDescription = projectDescriptionField.getText();
 		
+		/*
 		project project = new project();
 		project.setTitle(projectName);
-		project.setCustomer(customerName);
-
+		project.setCustomer(customerName);  */
+		
 		
 		if (!serializedComplete)
 		{
@@ -338,7 +397,16 @@ public class WelcomeScreen {
 	        
 	        	writer.write(projectName);
 	        	writer.write(String.format("%n"));
-	        	writer.write(customerName);	
+	        	writer.write(customerName);
+	        	writer.write(String.format("%n"));
+	        	writer.write(stakeholders);
+	        	writer.write(String.format("%n"));
+	        	//writer.write(projectDescription);
+	        	//writer.write(String.format("%n"));
+	        	writer.write(textArea);
+	        	writer.write(String.format("%n"));
+	        	writer.write(teamMembersText);
+	        	
 	        	//line needed to push
 	        
 	    	} catch (IOException e) {

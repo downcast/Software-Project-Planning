@@ -1,30 +1,45 @@
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import java.awt.Window.Type;
 import javax.swing.JPanel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.util.Scanner;
 import java.awt.event.ActionEvent;
+import javax.swing.JSeparator;
 import javax.swing.SwingConstants;
 import javax.swing.border.BevelBorder;
 import java.awt.Color;
+import javax.swing.JPasswordField;
+import javax.swing.JScrollPane;
+import java.awt.Toolkit;
 import javax.swing.JLayeredPane;
 import javax.swing.JTextField;
 import java.awt.Font;
 import javax.swing.JLabel;
 import java.io.*;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
+import javax.swing.JTextPane;
+import javax.swing.KeyStroke;
 import javax.swing.ScrollPaneConstants;
+import javax.swing.JTextArea;
+
+
 
 public class MainWindow {
+	
+	
 
+	String fileToLoad;
 	private JFrame frmProjectManager;
 	private JTextField projectNameField;
 	private JTextField mainCustomerNameField;
-	String fileToLoad;
+	private JTextField stakeholdersField;
+	private JTextPane descriptionPane;
+	private JTextArea description;
+	private JTextArea teamMembers;
 	String state = "Edit";
+	
 
 	/**
 	 * Launch the application.
@@ -42,6 +57,7 @@ public class MainWindow {
 		});
 	}
 
+	//comment
 	/**
 	 * Create the application.
 	 * @throws IOException 
@@ -52,11 +68,16 @@ public class MainWindow {
 		initialize();
 	}
 	
+	
+
 	/**
 	 * Initialize the contents of the frame.
 	 * @throws IOException 
 	 */
-	private void initialize() throws IOException {
+	private void initialize() throws IOException 
+	{
+		
+		
 		
 		frmProjectManager = new JFrame();
 		frmProjectManager.setResizable(false);
@@ -66,9 +87,13 @@ public class MainWindow {
 		frmProjectManager.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmProjectManager.getContentPane().setLayout(null);
 		frmProjectManager.setVisible(true);
+		
+		JLayeredPane Requirements = new JLayeredPane();
 		JLayeredPane General = new JLayeredPane();
 		JLayeredPane EffortMonitoring = new JLayeredPane();
 		JLayeredPane MainMenu = new JLayeredPane();
+		
+		Requirements.setVisible(false);
 		General.setVisible(false);  
 		EffortMonitoring.setVisible(false);
 		
@@ -85,11 +110,10 @@ public class MainWindow {
 				WelcomeScreen ws = new WelcomeScreen();
 			}
 		});
-		
 		WelcomeScreenBtnSide.setBounds(0, 0, 199, 80);
 		panel.add(WelcomeScreenBtnSide);
 		
-		JLayeredPane Requirements = new JLayeredPane();
+		
 		Requirements.setVisible(false);
 		Requirements.setBounds(200, 0, 815, 541);
 		frmProjectManager.getContentPane().add(Requirements);
@@ -124,7 +148,8 @@ public class MainWindow {
 		JButton btnEffortMonitoringAnd = new JButton("Effort Monitoring");
 		btnEffortMonitoringAnd.setBounds(0, 460, 199, 80);
 		panel.add(btnEffortMonitoringAnd);
-		MainMenu.setVisible(true);
+		
+		//MainMenu.setVisible(true);
 		
 		JLabel lblRequirements = new JLabel("Requirements");
 		lblRequirements.setHorizontalAlignment(SwingConstants.CENTER);
@@ -189,7 +214,7 @@ public class MainWindow {
 		nonFunctionalPane.setLayout(null);
 		
 		JLabel lblNonfuncctional = new JLabel("Non-Functional");
-		lblNonfuncctional.setBounds(165, 5, 77, 14);
+		lblNonfuncctional.setBounds(165, 5, 134, 14);
 		nonFunctionalPane.add(lblNonfuncctional);
 		
 		JButton nonFunctionalAdd = new JButton("Add");
@@ -234,9 +259,36 @@ public class MainWindow {
 		JPanel nonFunctionalScrollPanePanel = new JPanel();
 		nonFunctionalScrollPane.setViewportView(nonFunctionalScrollPanePanel);
 		
-		JPanel panel_1 = new JPanel();
-		panel_1.setBounds(200, 0, 815, 541);
-		frmProjectManager.getContentPane().add(panel_1);
+		btnNewButton_1 = new JButton("Main Menu ");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Requirements.setVisible(false);
+				EffortMonitoring.setVisible(false);
+				General.setVisible(false);
+				MainMenu.setVisible(true);  //asdasd
+			}
+		});
+		btnNewButton_1.setBounds(0, 115, 199, 80);
+		panel.add(btnNewButton_1);
+		
+		btnNewButton_2 = new JButton("General");
+		btnNewButton_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Requirements.setVisible(false);
+				MainMenu.setVisible(false);
+				EffortMonitoring.setVisible(false);
+				General.setVisible(true);
+			}
+		});
+		btnNewButton_2.setBounds(0, 230, 199, 80);
+		panel.add(btnNewButton_2);
+		
+		
+		btnEffortMonitoringAnd = new JButton("Effort Monitoring");
+		btnEffortMonitoringAnd.setBounds(0, 460, 199, 80);
+		panel.add(btnEffortMonitoringAnd);
+		
+		//MainMenu.setVisible(true);
 		
 		// ------------------Main Menu-----------------------------------
 		MainMenu.setBounds(200, 0, 815, 541);
@@ -262,7 +314,7 @@ public class MainWindow {
 		projectNameField = new JTextField();
 		projectNameField.setText("Project Name goes here");
 		projectNameField.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		projectNameField.setBounds(174, 140, 476, 25);
+		projectNameField.setBounds(174, 140, 524, 25);
 		MainMenu.add(projectNameField);
 		projectNameField.setColumns(10);
 		
@@ -271,6 +323,41 @@ public class MainWindow {
 		mainCustomerNameField.setBounds(251, 180, 447, 25);
 		MainMenu.add(mainCustomerNameField);
 		mainCustomerNameField.setColumns(10);
+		
+		JLabel lblStakeholders = new JLabel("Stakeholders:");
+		lblStakeholders.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblStakeholders.setBounds(40, 220, 217, 25);
+		MainMenu.add(lblStakeholders);
+		
+		stakeholdersField = new JTextField();
+		stakeholdersField.setText((String) null);
+		stakeholdersField.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		stakeholdersField.setColumns(10);
+		stakeholdersField.setBounds(161, 220, 537, 25);
+		MainMenu.add(stakeholdersField);
+		
+		JLabel lblDescription = new JLabel("Description:");
+		lblDescription.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblDescription.setBounds(40, 260, 217, 25);
+		MainMenu.add(lblDescription);
+		
+		description = new JTextArea();
+		description.setWrapStyleWord(true);
+		description.setLineWrap(true);
+		description.setBounds(161, 260, 537, 146);
+		MainMenu.add(description);
+		
+		JLabel lblTeamMembers = new JLabel("Team Members:");
+		lblTeamMembers.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblTeamMembers.setBounds(40, 419, 217, 25);
+		MainMenu.add(lblTeamMembers);
+		
+		teamMembers = new JTextArea();
+		teamMembers.setWrapStyleWord(true);
+		teamMembers.setText((String) null);
+		teamMembers.setLineWrap(true);
+		teamMembers.setBounds(185, 422, 537, 106);
+		MainMenu.add(teamMembers);
 		
 		EffortMonitoring.setBounds(200, 0, 815, 541);
 		frmProjectManager.getContentPane().add(EffortMonitoring);
@@ -281,8 +368,6 @@ public class MainWindow {
 		lblEffortMonitoringandTracking.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblEffortMonitoringandTracking.setBounds(298, 41, 250, 22);
 		EffortMonitoring.add(lblEffortMonitoringandTracking);
-		
-		
 		
 		//----------------------------------------------------------------
 		
@@ -299,6 +384,22 @@ public class MainWindow {
 		lblGeneral.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblGeneral.setBounds(351, 41, 168, 22);
 		General.add(lblGeneral);
+		
+		
+		
+		
+		//-----------------------------------------------------------------
+
+		
+		Requirements.setBounds(200, 0, 815, 541);
+		frmProjectManager.getContentPane().add(Requirements);
+		Requirements.setLayout(null);
+		
+		lblRequirements = new JLabel("Requirements");
+		lblRequirements.setHorizontalAlignment(SwingConstants.CENTER);
+		lblRequirements.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblRequirements.setBounds(351, 41, 168, 22);
+		Requirements.add(lblRequirements);
 		
 		btnEffortMonitoringAnd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -331,13 +432,16 @@ public class MainWindow {
 		Scanner fileScan = new Scanner(temp);
 		projectNameField.setText(fileScan.nextLine());
 		mainCustomerNameField.setText(fileScan.nextLine());
-		fileScan.close();
-	}
-	
-	public void addRequirement(JPanel panel){
-		//JTextArea textArea
+		stakeholdersField.setText(fileScan.nextLine());
+		/*for (int i = 0; i < fileScan.nextInt(); i++)
+		{
+			description.setText(fileScan.nextLine());
+		} */
 		
-		//panel.add
-	}
+		description.setText(fileScan.nextLine());
+		teamMembers.setText(fileScan.nextLine());
+		
 	
+		
+	}
 }
