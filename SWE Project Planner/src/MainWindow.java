@@ -147,9 +147,10 @@ public class MainWindow {
 		
 		JButton btnEffortMonitoringAnd = new JButton("Effort Monitoring");
 		btnEffortMonitoringAnd.setBounds(0, 460, 199, 80);
-		panel.add(btnEffortMonitoringAnd);
+		//This line caused effort monitoring issue. Leaving here in case needed.
+		//panel.add(btnEffortMonitoringAnd);
 		
-		//MainMenu.setVisible(true);
+		MainMenu.setVisible(true);
 		
 		JLabel lblRequirements = new JLabel("Requirements");
 		lblRequirements.setHorizontalAlignment(SwingConstants.CENTER);
@@ -288,7 +289,7 @@ public class MainWindow {
 		btnEffortMonitoringAnd.setBounds(0, 460, 199, 80);
 		panel.add(btnEffortMonitoringAnd);
 		
-		//MainMenu.setVisible(true);
+		MainMenu.setVisible(true);
 		
 		// ------------------Main Menu-----------------------------------
 		MainMenu.setBounds(200, 0, 815, 541);
@@ -423,7 +424,7 @@ public class MainWindow {
 		panel.add(btnRequirements);
 		
 		
-		loadProject(fileToLoad);
+		//loadProject(fileToLoad);
 	}
 	
 	public void loadProject(String fileName) throws IOException
