@@ -277,7 +277,7 @@ public class WelcomeScreen {
 		description.setWrapStyleWord(true);
 		description.setLineWrap(true);
 		description.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		description.setText("New change New CHange");
+		description.setText("Description text");
 		description.setBounds(183, 187, 423, 230);
 		panel_1.add(description);
 		
@@ -307,7 +307,7 @@ public class WelcomeScreen {
 			}
 		});
 		teamMembers.setWrapStyleWord(true);
-		teamMembers.setText("New change New CHange");
+		teamMembers.setText("Team Members Text");
 		teamMembers.setLineWrap(true);
 		teamMembers.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		teamMembers.setBounds(183, 454, 423, 176);
@@ -325,6 +325,28 @@ public class WelcomeScreen {
 		scrollPane.setBounds(0, 0, 810, 460);
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		NewProjectPane.add(scrollPane);
+		
+		JTextArea txtrProjectManager = new JTextArea();
+		txtrProjectManager.setBounds(370, 0, 532, 64);
+		frmProjectManager.getContentPane().add(txtrProjectManager);
+		txtrProjectManager.setEditable(false);
+		txtrProjectManager.setFont(new Font("Tahoma", Font.PLAIN, 49));
+		txtrProjectManager.setText("Project Manager 2016");
+		txtrProjectManager.setBackground(SystemColor.menu);
+		
+		JTextArea txtrWelcomeLetsCreate = new JTextArea();
+		txtrWelcomeLetsCreate.setBackground(SystemColor.menu);
+		txtrWelcomeLetsCreate.setBounds(350, 70, 545, 26);
+		frmProjectManager.getContentPane().add(txtrWelcomeLetsCreate);
+		txtrWelcomeLetsCreate.setText("Welcome! Let's create a new project or open an existing project.");
+		txtrWelcomeLetsCreate.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		
+		JTextArea txtrPleaseStartFrom = new JTextArea();
+		txtrPleaseStartFrom.setText("Please start from the sidebar on the left to begin managing your software project.");
+		txtrPleaseStartFrom.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		txtrPleaseStartFrom.setBackground(SystemColor.menu);
+		txtrPleaseStartFrom.setBounds(269, 100, 676, 26);
+		frmProjectManager.getContentPane().add(txtrPleaseStartFrom);
 		
 		
 		RecentProjectPane.setBounds(200, 0, 815, 541);
@@ -349,8 +371,8 @@ public class WelcomeScreen {
             File file = chooser.getSelectedFile();
             
             try {
-				MainWindow window = new MainWindow(file.getName());
-				window.frmProjectManager.setVisible(true);
+				MainWindow loadedWindow = new MainWindow(file.getName());
+				
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
