@@ -12,7 +12,7 @@ import java.awt.event.ActionEvent;
 import java.io.*;
 
 
-public class WelcomeScreen {  //asdasd
+public class WelcomeScreen {  
 	JDialog input1 = new javax.swing.JDialog();
 	
 
@@ -339,7 +339,7 @@ public class WelcomeScreen {  //asdasd
 		// Puts it at the project directory
 		chooser.setCurrentDirectory(new File("."));
 		// Looks only at txt files
-		FileNameExtensionFilter filter = new FileNameExtensionFilter("Project files (*.xxxVirus)", "xxxVirus");
+		FileNameExtensionFilter filter = new FileNameExtensionFilter("Project files (*.txt)", "txt");
 		chooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
 		
 		chooser.setFileFilter(filter);
@@ -348,10 +348,14 @@ public class WelcomeScreen {  //asdasd
 		if (returnVal == JFileChooser.APPROVE_OPTION) {
             File file = chooser.getSelectedFile();
             
-            project p = new project();
-            //p = projData.loadData(file.getName());
+            try {
+				MainWindow window = new MainWindow(file.getName());
+				window.frmProjectManager.setVisible(true);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
             
-            System.out.println(p.getTitle());
         } 
 		
 	}
@@ -384,8 +388,8 @@ public class WelcomeScreen {  //asdasd
 		/*
 		project project = new project();
 		project.setTitle(projectName);
-		project.setCustomer(customerName);  */
-		
+		project.setCustomer(customerName);  
+		*/
 		
 		if (!serializedComplete)
 		{

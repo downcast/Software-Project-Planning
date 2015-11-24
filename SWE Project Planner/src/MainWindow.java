@@ -31,7 +31,7 @@ public class MainWindow {
 	
 
 	String fileToLoad;
-	private JFrame frmProjectManager;
+	JFrame frmProjectManager;
 	private JTextField projectNameField;
 	private JTextField mainCustomerNameField;
 	private JTextField stakeholdersField;
@@ -424,7 +424,7 @@ public class MainWindow {
 		panel.add(btnRequirements);
 		
 		
-		//loadProject(fileToLoad);
+		loadProject(fileToLoad);
 	}
 	
 	public void loadProject(String fileName) throws IOException
