@@ -8,6 +8,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.awt.event.ActionEvent;
 import javax.swing.JSeparator;
@@ -472,6 +473,19 @@ public class MainWindow implements FocusListener{
 				EffortMonitoring.setVisible(false);
 				General.setVisible(false);
 				Requirements.setVisible(true);
+				
+				ArrayList<Component> temp = new ArrayList<>();
+				for (Component j : nonFunctionalScrollPanePanel.getComponents()){
+					temp.add(j);
+				}
+				currentProject.setNonFunRequirements(temp);
+				
+				ArrayList<Component> temp2 = new ArrayList<>();
+				for (Component j : functionalScrollPanePanel.getComponents()){
+					temp2.add(j);
+				}
+				currentProject.setFunRequirements(temp2);
+				ProjectData.saveData(currentProject);
 			}
 		});
 		btnRequirements.setBounds(0, 345, 199, 80);
@@ -480,11 +494,29 @@ public class MainWindow implements FocusListener{
 		//loadProject(fileToLoad);
 		currentProject = ProjectData.loadData(fileToLoad);
 		
+		// -----------Main Menu content being populated -----------------
 		projectNameField.setText(currentProject.getTitle());
 		mainCustomerNameField.setText(currentProject.getCustomer());
 		stakeholdersField.setText(currentProject.getStakeholder());
 		description.setText(currentProject.getDescription());
 		teamMembers.setText(currentProject.getTeamMembers());
+		
+		// ------------ Requirement content being populated -----------
+		for (Component j : currentProject.getNonFunRequirements()){
+			j.addFocusListener(this);
+			j.setEnabled(false);
+			nonFunctionalScrollPanePanel.add((JTextArea)j);
+		}
+		nonFunctionalScrollPanePanel.revalidate();
+		nonFunctionalScrollPanePanel.repaint();
+		
+		for (Component j : currentProject.getFunRequirements()){
+			j.addFocusListener(this);
+			j.setEnabled(false);
+			functionalScrollPanePanel.add((JTextArea)j);
+		}
+		functionalScrollPanePanel.revalidate();
+		functionalScrollPanePanel.repaint();
 	}
 	
 	public void loadProject(String fileName)

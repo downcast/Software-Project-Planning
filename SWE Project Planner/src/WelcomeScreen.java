@@ -219,8 +219,6 @@ public class WelcomeScreen {
 		projectNameField.setColumns(10);
 		
 		
-		
-		
 		JScrollPane scrollPane = new JScrollPane(panel_1);
 		
 		customerNameField = new JTextField();

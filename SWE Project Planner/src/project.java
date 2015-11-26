@@ -1,3 +1,4 @@
+import java.awt.Component;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -9,6 +10,8 @@ public class project implements java.io.Serializable{
 	String description;
 	schedule schedj;
 	ArrayList<team> responsibleTeams = new ArrayList<team>();
+	ArrayList<Component> nonFunRequirements = new ArrayList<>();
+	ArrayList<Component> funRequirements = new ArrayList<>();
 	String teamMembers;
 	double estimatedCost;
 	double actualCost;
@@ -44,6 +47,20 @@ public class project implements java.io.Serializable{
 	}
 	String getStakeholder(){
 		return stakeholders;
+	}
+	
+	public ArrayList<Component> getNonFunRequirements() {
+		return nonFunRequirements;
+	}
+	public void setNonFunRequirements(ArrayList<Component> nonFunRequirements) {
+		this.nonFunRequirements = nonFunRequirements;
+	}
+	
+	public ArrayList<Component> getFunRequirements() {
+		return funRequirements;
+	}
+	public void setFunRequirements(ArrayList<Component> funRequirements) {
+		this.funRequirements = funRequirements;
 	}
 	
 	void setTeamMembers(String teamMembers){
