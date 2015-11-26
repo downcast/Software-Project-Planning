@@ -43,6 +43,8 @@ public class MainWindow implements FocusListener{
 	private JTextArea focusedRequirement;
 	String state = "Edit";
 	private int funIndex, nonIndex = 0;
+	
+	private project currentProject;
 
 	/**
 	 * Launch the application.
@@ -62,9 +64,8 @@ public class MainWindow implements FocusListener{
 
 	/**
 	 * Create the application.
-	 * @throws IOException 
 	 */
-	public MainWindow(String fileName) throws IOException 
+	public MainWindow(String fileName)
 	{
 		fileToLoad = fileName;
 		initialize();
@@ -72,9 +73,8 @@ public class MainWindow implements FocusListener{
 	
 	/**
 	 * Initialize the contents of the frame.
-	 * @throws IOException 
 	 */
-	private void initialize() throws IOException 
+	private void initialize()
 	{
 		frmProjectManager = new JFrame();
 		frmProjectManager.setResizable(false);
@@ -477,13 +477,19 @@ public class MainWindow implements FocusListener{
 		btnRequirements.setBounds(0, 345, 199, 80);
 		panel.add(btnRequirements);
 		
+		//loadProject(fileToLoad);
+		currentProject = ProjectData.loadData(fileToLoad);
 		
-		loadProject(fileToLoad);
+		projectNameField.setText(currentProject.getTitle());
+		mainCustomerNameField.setText(currentProject.getCustomer());
+		stakeholdersField.setText(currentProject.getStakeholder());
+		description.setText(currentProject.getDescription());
+		teamMembers.setText(currentProject.getTeamMembers());
 	}
 	
-	public void loadProject(String fileName) throws IOException
+	public void loadProject(String fileName)
 	{
-		File temp = new File(fileToLoad);
+		/*File temp = new File(fileToLoad);
 		Scanner fileScan = new Scanner(temp);
 		projectNameField.setText(fileScan.nextLine());
 		mainCustomerNameField.setText(fileScan.nextLine());
@@ -492,9 +498,10 @@ public class MainWindow implements FocusListener{
 		{
 			description.setText(fileScan.nextLine());
 		} */
-		
+		/*
 		description.setText(fileScan.nextLine());
-		teamMembers.setText(fileScan.nextLine());	
+		teamMembers.setText(fileScan.nextLine());
+		*/	
 	}
 
 	@Override

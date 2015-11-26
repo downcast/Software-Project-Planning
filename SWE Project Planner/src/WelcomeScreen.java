@@ -26,8 +26,6 @@ public class WelcomeScreen {
 	
 	public boolean serializedComplete = false;
 	
-	ProjectData projData;
-	
 	String projectName;
 	String customerName;
 	String stakeholders;
@@ -35,11 +33,11 @@ public class WelcomeScreen {
 	String textArea;
 	String teamMembersText;
 
+	public static project currentProject;
+	
 	/**
 	 * Launch the application.
 	 */
-	public static project currentProject;
-	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -147,7 +145,7 @@ public class WelcomeScreen {
 		frmProjectManager.getContentPane().add(panel);
 		panel.setLayout(null);
 		
-		projData = new ProjectData();
+		//projData = new ProjectData();
 		
 		//-------------New Project-------------------
 		JButton btnNewProject = new JButton("New Project");
@@ -360,8 +358,8 @@ public class WelcomeScreen {
 		JFileChooser chooser = new JFileChooser();
 		// Puts it at the project directory
 		chooser.setCurrentDirectory(new File("."));
-		// Looks only at txt files
-		FileNameExtensionFilter filter = new FileNameExtensionFilter("Project files (*.txt)", "txt");
+		// Looks only at pjm files
+		FileNameExtensionFilter filter = new FileNameExtensionFilter("Project files (*.pjm)", "pjm");
 		chooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
 		
 		chooser.setFileFilter(filter);
@@ -370,26 +368,22 @@ public class WelcomeScreen {
 		if (returnVal == JFileChooser.APPROVE_OPTION) {
             File file = chooser.getSelectedFile();
             
-            try {
-				MainWindow loadedWindow = new MainWindow(file.getName());
-				
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-            
-        } 
-		
+            MainWindow loadedWindow = new MainWindow(file.getName());   
+        }
 	}
 	
 	void EnterInformation() throws IOException
 	{
 		project p = new project();
-		p.setTitle("Your mother");
+		p.setTitle(projectNameField.getText());
+		p.setCustomer(customerNameField.getText());
+		p.setDescription(description.getText());
+		p.setStakeholders(stakeholderField.getText());
+		p.setTeamMembers(teamMembers.getText());
 		
-		projData.saveData(p);
+		ProjectData.saveData(p);
 		
-		
+		/*
 		projectName = projectNameField.getText();
 		customerName = customerNameField.getText();
 		stakeholders = stakeholderField.getText();
@@ -407,11 +401,6 @@ public class WelcomeScreen {
 		
 		//projectDescription = projectDescriptionField.getText();
 		
-		/*
-		project project = new project();
-		project.setTitle(projectName);
-		project.setCustomer(customerName);  
-		*/
 		
 		if (!serializedComplete)
 		{
@@ -442,8 +431,12 @@ public class WelcomeScreen {
 	    	}
 	    	System.out.printf("File is located at %s%n", file.getAbsolutePath());  
 	    	
+	    	
 			frmProjectManager.dispose();
 			MainWindow mw = new MainWindow(projectName + ".txt");
 		}
+		*/
+		frmProjectManager.dispose();
+		MainWindow mw = new MainWindow(projectNameField.getText() + ".pjm");
 	}
 }

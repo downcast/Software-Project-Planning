@@ -7,10 +7,10 @@ import java.io.ObjectOutputStream;
 
 public class ProjectData{
 	
-	public void saveData(project p){
+	public static void saveData(project p){
 
 		try {
-			ObjectOutputStream oos= new ObjectOutputStream(new FileOutputStream((p.getTitle() + ".xxxVirus").toString()));
+			ObjectOutputStream oos= new ObjectOutputStream(new FileOutputStream((p.getTitle() + ".pjm").toString()));
 			oos.writeObject(p);
 			oos.close();
 		} catch (FileNotFoundException e) {
@@ -20,7 +20,7 @@ public class ProjectData{
 		}
 	}
 	
-	public project loadData(String fileName){
+	public static project loadData(String fileName){
 		
 		project x = new project();
 		
@@ -29,6 +29,7 @@ public class ProjectData{
 			ObjectInputStream reader = new ObjectInputStream(door);
 			
 			x = (project) reader.readObject();
+			reader.close();
 		}
 		catch (IOException e){ 
 			e.printStackTrace();

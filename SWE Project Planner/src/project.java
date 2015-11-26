@@ -4,10 +4,12 @@ import java.util.Date;
 public class project implements java.io.Serializable{
 	String customer;
 	String title;
-	ArrayList<person> stakeholders;
+	//ArrayList<person> stakeholders;
+	String stakeholders;
 	String description;
 	schedule schedj;
 	ArrayList<team> responsibleTeams = new ArrayList<team>();
+	String teamMembers;
 	double estimatedCost;
 	double actualCost;
 	Date startDate;
@@ -35,6 +37,20 @@ public class project implements java.io.Serializable{
 	}
 	String getDescription(){
 		return description;
+	}
+	
+	void setStakeholders(String stakeholders){
+		this.stakeholders = stakeholders;
+	}
+	String getStakeholder(){
+		return stakeholders;
+	}
+	
+	void setTeamMembers(String teamMembers){
+		this.teamMembers = teamMembers;
+	}
+	String getTeamMembers(){
+		return teamMembers;
 	}
 	
 	//set/get schedule
