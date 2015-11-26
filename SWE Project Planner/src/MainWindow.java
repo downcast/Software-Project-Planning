@@ -3,14 +3,19 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import java.awt.Window.Type;
 import javax.swing.JPanel;
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.util.Scanner;
 import java.awt.event.ActionEvent;
 import javax.swing.JSeparator;
 import javax.swing.SwingConstants;
 import javax.swing.border.BevelBorder;
 import java.awt.Color;
+import java.awt.Component;
+
 import javax.swing.JPasswordField;
 import javax.swing.JScrollPane;
 import java.awt.Toolkit;
@@ -24,12 +29,8 @@ import javax.swing.KeyStroke;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.JTextArea;
 
-
-
-public class MainWindow {
+public class MainWindow implements FocusListener{
 	
-	
-
 	String fileToLoad;
 	JFrame frmProjectManager;
 	private JTextField projectNameField;
@@ -38,8 +39,10 @@ public class MainWindow {
 	private JTextPane descriptionPane;
 	private JTextArea description;
 	private JTextArea teamMembers;
+	/** Holds the Requirement component that is current selected **/
+	private JTextArea focusedRequirement;
 	String state = "Edit";
-	
+	private int funIndex, nonIndex = 0;
 
 	/**
 	 * Launch the application.
@@ -57,7 +60,6 @@ public class MainWindow {
 		});
 	}
 
-	//comment
 	/**
 	 * Create the application.
 	 * @throws IOException 
@@ -68,17 +70,12 @@ public class MainWindow {
 		initialize();
 	}
 	
-	
-
 	/**
 	 * Initialize the contents of the frame.
 	 * @throws IOException 
 	 */
 	private void initialize() throws IOException 
 	{
-		
-		
-		
 		frmProjectManager = new JFrame();
 		frmProjectManager.setResizable(false);
 		frmProjectManager.setTitle("Project Manager 2016");
@@ -152,6 +149,7 @@ public class MainWindow {
 		
 		MainMenu.setVisible(true);
 		
+		
 		JLabel lblRequirements = new JLabel("Requirements");
 		lblRequirements.setHorizontalAlignment(SwingConstants.CENTER);
 		lblRequirements.setFont(new Font("Tahoma", Font.PLAIN, 18));
@@ -163,14 +161,33 @@ public class MainWindow {
 		functionalPane.setBounds(407, 70, 407, 471);
 		Requirements.add(functionalPane);
 		
+		JScrollPane functionalScrollPane = new JScrollPane();
+		functionalScrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		functionalScrollPane.setBounds(0, 70, 407, 401);
+		functionalPane.add(functionalScrollPane);
+		
+		JPanel functionalScrollPanePanel = new JPanel();
+		functionalScrollPane.setViewportView(functionalScrollPanePanel);
+		
+		// Makes it so that when a textField is added, it adds it underneath the previous one like in a stack
+		functionalScrollPanePanel.setLayout(new BoxLayout(functionalScrollPanePanel, BoxLayout.Y_AXIS));
+		
 		JLabel functionalLabel = new JLabel("Functional");
 		functionalLabel.setBounds(165, 5, 77, 14);
 		functionalPane.add(functionalLabel);
 		
 		JButton functionalAdd = new JButton("Add");
 		functionalAdd.setVisible(false);
+		
 		functionalAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				JTextArea f = new JTextArea("Fun Requirement " + funIndex);
+				f.setLineWrap(true);
+				f.setWrapStyleWord(true);
+				f.addFocusListener(MainWindow.this);
+				funIndex++;
+				functionalScrollPanePanel.add(f);
+				functionalScrollPanePanel.revalidate();
 			}
 		});
 		
@@ -182,6 +199,16 @@ public class MainWindow {
 		functionalRemove.setBounds(109, 35, 89, 23);
 		functionalPane.add(functionalRemove);
 		
+		functionalRemove.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (focusedRequirement != null){
+					functionalScrollPanePanel.remove(focusedRequirement);
+					functionalScrollPanePanel.revalidate();
+					functionalScrollPanePanel.repaint();
+				}
+			}
+		});
+		
 		JButton functionalEdit = new JButton(state);
 		functionalEdit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -190,29 +217,39 @@ public class MainWindow {
 					functionalEdit.setText(state);
 					functionalAdd.setVisible(false);
 					functionalRemove.setVisible(false);
+					
+					for (Component j : functionalScrollPanePanel.getComponents()){
+						j.setEnabled(false);
+					}
 				} else {
 					state = "View";
 					functionalEdit.setText(state);
 					functionalAdd.setVisible(true);
 					functionalRemove.setVisible(true);
+					for (Component j : functionalScrollPanePanel.getComponents()){
+						j.setEnabled(true);
+					}
 				}
 			}
 		});
 		functionalEdit.setBounds(308, 35, 89, 23);
 		functionalPane.add(functionalEdit);
 		
-		JScrollPane functionalScrollPane = new JScrollPane();
-		functionalScrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-		functionalScrollPane.setBounds(0, 70, 407, 401);
-		functionalPane.add(functionalScrollPane);
-		
-		JPanel functionalScrollPanePanel = new JPanel();
-		functionalScrollPane.setViewportView(functionalScrollPanePanel);
-		
 		JPanel nonFunctionalPane = new JPanel();
 		nonFunctionalPane.setBounds(0, 70, 407, 471);
 		Requirements.add(nonFunctionalPane);
 		nonFunctionalPane.setLayout(null);
+		
+		JScrollPane nonFunctionalScrollPane = new JScrollPane();
+		nonFunctionalScrollPane.setBounds(0, 70, 407, 401);
+		nonFunctionalScrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		nonFunctionalPane.add(nonFunctionalScrollPane);
+		
+		JPanel nonFunctionalScrollPanePanel = new JPanel();
+		nonFunctionalScrollPane.setViewportView(nonFunctionalScrollPanePanel);
+		
+		// Makes it so that when a textField is added, it adds it underneath the previous one like in a stack
+		nonFunctionalScrollPanePanel.setLayout(new BoxLayout(nonFunctionalScrollPanePanel, BoxLayout.Y_AXIS));
 		
 		JLabel lblNonfuncctional = new JLabel("Non-Functional");
 		lblNonfuncctional.setBounds(165, 5, 134, 14);
@@ -222,6 +259,13 @@ public class MainWindow {
 		nonFunctionalAdd.setVisible(false);
 		nonFunctionalAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				JTextArea f = new JTextArea("Non Requirement " + nonIndex);
+				f.setLineWrap(true);
+				f.setWrapStyleWord(true);
+				f.addFocusListener(MainWindow.this);
+				nonIndex++;
+				nonFunctionalScrollPanePanel.add(f);
+				nonFunctionalScrollPanePanel.revalidate();
 			}
 		});
 		
@@ -233,6 +277,16 @@ public class MainWindow {
 		nonFunctionalRemove.setBounds(109, 35, 89, 23);
 		nonFunctionalPane.add(nonFunctionalRemove);
 		
+		nonFunctionalRemove.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (focusedRequirement != null){
+					nonFunctionalScrollPanePanel.remove(focusedRequirement);
+					nonFunctionalScrollPanePanel.revalidate();
+					nonFunctionalScrollPanePanel.repaint();
+				}
+			}
+		});
+		
 		JButton nonFunctionalEdit = new JButton(state);
 		nonFunctionalEdit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -241,24 +295,24 @@ public class MainWindow {
 					nonFunctionalEdit.setText(state);
 					nonFunctionalAdd.setVisible(false);
 					nonFunctionalRemove.setVisible(false);
+					
+					for (Component j : nonFunctionalScrollPanePanel.getComponents()){
+						j.setEnabled(false);
+					}
 				} else {
 					state = "View";
 					nonFunctionalEdit.setText(state);
 					nonFunctionalAdd.setVisible(true);
 					nonFunctionalRemove.setVisible(true);
+					
+					for (Component j : nonFunctionalScrollPanePanel.getComponents()){
+						j.setEnabled(true);
+					}
 				}
 			}
 		});
 		nonFunctionalEdit.setBounds(308, 35, 89, 23);
 		nonFunctionalPane.add(nonFunctionalEdit);
-		
-		JScrollPane nonFunctionalScrollPane = new JScrollPane();
-		nonFunctionalScrollPane.setBounds(0, 70, 407, 401);
-		nonFunctionalScrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-		nonFunctionalPane.add(nonFunctionalScrollPane);
-		
-		JPanel nonFunctionalScrollPanePanel = new JPanel();
-		nonFunctionalScrollPane.setViewportView(nonFunctionalScrollPanePanel);
 		
 		btnNewButton_1 = new JButton("Main Menu ");
 		btnNewButton_1.addActionListener(new ActionListener() {
@@ -440,9 +494,18 @@ public class MainWindow {
 		} */
 		
 		description.setText(fileScan.nextLine());
-		teamMembers.setText(fileScan.nextLine());
-		
-	
-		
+		teamMembers.setText(fileScan.nextLine());	
+	}
+
+	@Override
+	public void focusGained(FocusEvent event) {
+		focusedRequirement = (JTextArea) event.getComponent();
+	}
+
+	@Override
+	public void focusLost(FocusEvent arg0) {
+		// Used by the Requirements
+		// Does nothing on purpose.
+		// Here call arg0.getComponent() to find out who has lost focus
 	}
 }
