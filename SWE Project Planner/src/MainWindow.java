@@ -5,6 +5,8 @@ import java.awt.Window.Type;
 import javax.swing.JPanel;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
+
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
@@ -153,6 +155,17 @@ public class MainWindow implements FocusListener{
 		//panel.add(btnEffortMonitoringAnd);
 		
 		General.setVisible(true);
+		
+		JComboBox comboBox = new JComboBox();
+		comboBox.setBounds(140, 130, 223, 29);
+		EffortMonitoring.add(comboBox);
+		comboBox.addItem("Designing");
+		comboBox.addItem("Requirements Analysis");
+		comboBox.addItem("Coding");
+		comboBox.addItem("Testing");
+		comboBox.addItem("Project Management");
+
+
 		
 		
 		JLabel lblRequirements = new JLabel("Requirements");
