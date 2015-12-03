@@ -52,6 +52,16 @@ public class MainWindow implements FocusListener{
 	private project currentProject;
 	private JButton newGeneralButton;
 	private JButton saveButton;
+	private JTextField designingEditField;
+	private JTextField codingEditField;
+	private JTextField testingEditField;
+	private JTextField projectManagementField;
+	private JTextField designingCurrentField;
+	private JTextField codingCurrentField;
+	private JTextField testingCurrentField;
+	private JTextField projectManagementCurrentField;
+	private JTextField userTotalCurrentField;
+	private JTextField projectTotalCurrentField;
 
 	/**
 	 * Launch the application.
@@ -60,7 +70,7 @@ public class MainWindow implements FocusListener{
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					MainWindow window = new MainWindow("default.txt");
+					MainWindow window = new MainWindow("New Serialization.pjm");
 					window.frmProjectManager.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -94,12 +104,10 @@ public class MainWindow implements FocusListener{
 		
 		JLayeredPane Requirements = new JLayeredPane();
 		JLayeredPane saveTempPane = new JLayeredPane();
-		JLayeredPane EffortMonitoring = new JLayeredPane();
 		JLayeredPane General = new JLayeredPane();
 		
 		Requirements.setVisible(false);
 		saveTempPane.setVisible(false);  
-		EffortMonitoring.setVisible(false);
 		
 		JPanel panel = new JPanel();
 		panel.setBounds(0, 0, 200, 541);
@@ -119,6 +127,17 @@ public class MainWindow implements FocusListener{
 		
 		
 		Requirements.setVisible(false);
+		JLayeredPane EffortMonitoring = new JLayeredPane();
+		EffortMonitoring.setBounds(200, 0, 815, 541);
+		frmProjectManager.getContentPane().add(EffortMonitoring);
+		EffortMonitoring.setVisible(false);
+		EffortMonitoring.setLayout(null);
+		
+		JLabel lblEffortMonitoringandTracking = new JLabel("Effort Monitoring and Tracking");
+		lblEffortMonitoringandTracking.setHorizontalAlignment(SwingConstants.CENTER);
+		lblEffortMonitoringandTracking.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblEffortMonitoringandTracking.setBounds(298, 41, 250, 22);
+		EffortMonitoring.add(lblEffortMonitoringandTracking);
 		Requirements.setBounds(200, 0, 815, 541);
 		frmProjectManager.getContentPane().add(Requirements);
 		Requirements.setLayout(null);
@@ -136,8 +155,6 @@ public class MainWindow implements FocusListener{
 		
 		newGeneralButton.setBounds(0, 115, 199, 80);
 		panel.add(newGeneralButton);
-		
-		JButton btnNewButton_2;
 		saveButton = new JButton("Save");
 		
 		saveButton.addActionListener(new ActionListener() {
@@ -146,7 +163,7 @@ public class MainWindow implements FocusListener{
 			}
 		});
 		
-		saveButton.setBounds(0, 230, 199, 80);
+		saveButton.setBounds(0, 460, 199, 80);
 		panel.add(saveButton);
 		
 		JButton btnEffortMonitoringAnd = new JButton("Effort Monitoring");
@@ -155,16 +172,129 @@ public class MainWindow implements FocusListener{
 		//panel.add(btnEffortMonitoringAnd);
 		
 		General.setVisible(true);
-		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(140, 130, 223, 29);
-		EffortMonitoring.add(comboBox);
-		comboBox.addItem("Designing");
-		comboBox.addItem("Requirements Analysis");
-		comboBox.addItem("Coding");
-		comboBox.addItem("Testing");
-		comboBox.addItem("Project Management");
 
+		JLabel lblDesigning = new JLabel("Designing");
+		lblDesigning.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblDesigning.setBounds(25, 165, 139, 25);
+		EffortMonitoring.add(lblDesigning);
+		
+		JLabel lblCoding = new JLabel("Coding");
+		lblCoding.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblCoding.setBounds(25, 210, 71, 25);
+		EffortMonitoring.add(lblCoding);
+		
+		JLabel lblTesting = new JLabel("Testing");
+		lblTesting.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblTesting.setBounds(25, 255, 71, 25);
+		EffortMonitoring.add(lblTesting);
+		
+		JLabel lblProjectManagement = new JLabel("Project Management");
+		lblProjectManagement.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblProjectManagement.setBounds(25, 300, 181, 25);
+		EffortMonitoring.add(lblProjectManagement);
+		
+		JLabel lblUserTotal = new JLabel("User Total");
+		lblUserTotal.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblUserTotal.setBounds(26, 385, 95, 25);
+		EffortMonitoring.add(lblUserTotal);
+		
+		JLabel lblNewLabel_1 = new JLabel("Project Total");
+		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblNewLabel_1.setBounds(26, 435, 119, 25);
+		EffortMonitoring.add(lblNewLabel_1);
+		
+		JLabel lblEditHours = new JLabel("Edit Hours");
+		lblEditHours.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblEditHours.setBounds(275, 95, 101, 32);
+		EffortMonitoring.add(lblEditHours);
+		
+		JLabel lblCurrentHours = new JLabel("Current Hours");
+		lblCurrentHours.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblCurrentHours.setBounds(558, 95, 148, 32);
+		EffortMonitoring.add(lblCurrentHours);
+		
+		designingEditField = new JTextField();
+		designingEditField.setHorizontalAlignment(SwingConstants.CENTER);
+		designingEditField.setBounds(260, 165, 116, 22);
+		EffortMonitoring.add(designingEditField);
+		designingEditField.setColumns(10);
+		
+		codingEditField = new JTextField();
+		codingEditField.setHorizontalAlignment(SwingConstants.CENTER);
+		codingEditField.setBounds(260, 210, 116, 22);
+		EffortMonitoring.add(codingEditField);
+		codingEditField.setColumns(10);
+		
+		testingEditField = new JTextField();
+		testingEditField.setHorizontalAlignment(SwingConstants.CENTER);
+		testingEditField.setBounds(260, 255, 116, 22);
+		EffortMonitoring.add(testingEditField);
+		testingEditField.setColumns(10);
+		
+		projectManagementField = new JTextField();
+		projectManagementField.setHorizontalAlignment(SwingConstants.CENTER);
+		projectManagementField.setBounds(260, 300, 116, 22);
+		EffortMonitoring.add(projectManagementField);
+		projectManagementField.setColumns(10);
+		
+		designingCurrentField = new JTextField();
+		designingCurrentField.setText("5");
+		designingCurrentField.setEditable(false);
+		designingCurrentField.setHorizontalAlignment(SwingConstants.CENTER);
+		designingCurrentField.setBounds(558, 165, 116, 22);
+		EffortMonitoring.add(designingCurrentField);
+		designingCurrentField.setColumns(10);
+		
+		codingCurrentField = new JTextField();
+		codingCurrentField.setText("3");
+		codingCurrentField.setEditable(false);
+		codingCurrentField.setHorizontalAlignment(SwingConstants.CENTER);
+		codingCurrentField.setBounds(558, 210, 116, 22);
+		EffortMonitoring.add(codingCurrentField);
+		codingCurrentField.setColumns(10);
+		
+		testingCurrentField = new JTextField();
+		testingCurrentField.setText("2");
+		testingCurrentField.setEditable(false);
+		testingCurrentField.setHorizontalAlignment(SwingConstants.CENTER);
+		testingCurrentField.setBounds(558, 255, 116, 22);
+		EffortMonitoring.add(testingCurrentField);
+		testingCurrentField.setColumns(10);
+		
+		projectManagementCurrentField = new JTextField();
+		projectManagementCurrentField.setText("5");
+		projectManagementCurrentField.setEditable(false);
+		projectManagementCurrentField.setHorizontalAlignment(SwingConstants.CENTER);
+		projectManagementCurrentField.setBounds(558, 300, 116, 22);
+		EffortMonitoring.add(projectManagementCurrentField);
+		projectManagementCurrentField.setColumns(10);
+		
+		userTotalCurrentField = new JTextField();
+		userTotalCurrentField.setText("15");
+		userTotalCurrentField.setEditable(false);
+		userTotalCurrentField.setHorizontalAlignment(SwingConstants.CENTER);
+		userTotalCurrentField.setBounds(558, 385, 116, 22);
+		EffortMonitoring.add(userTotalCurrentField);
+		userTotalCurrentField.setColumns(10);
+		
+		projectTotalCurrentField = new JTextField();
+		projectTotalCurrentField.setText("42");
+		projectTotalCurrentField.setEditable(false);
+		projectTotalCurrentField.setHorizontalAlignment(SwingConstants.CENTER);
+		projectTotalCurrentField.setBounds(558, 435, 116, 22);
+		EffortMonitoring.add(projectTotalCurrentField);
+		projectTotalCurrentField.setColumns(10);
+		
+		JButton btnAdd = new JButton("Add");
+		btnAdd.setBounds(25, 483, 200, 45);
+		EffortMonitoring.add(btnAdd);
+		
+		JButton btnSubtract = new JButton("Subtract");
+		btnSubtract.setBounds(224, 483, 200, 45);
+		EffortMonitoring.add(btnSubtract);
+		Requirements.setBounds(200, 0, 815, 541);
+		frmProjectManager.getContentPane().add(Requirements);
+		Requirements.setLayout(null);
 
 		
 		
@@ -343,21 +473,10 @@ public class MainWindow implements FocusListener{
 		});
 		btnNewButton_1.setBounds(0, 115, 199, 80);
 		panel.add(btnNewButton_1);
-		btnNewButton_2 = new JButton("General");
-		btnNewButton_2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Requirements.setVisible(false);
-				General.setVisible(false);
-				EffortMonitoring.setVisible(false);
-				saveTempPane.setVisible(true);
-			}
-		});
-		btnNewButton_2.setBounds(0, 230, 199, 80);
-		panel.add(btnNewButton_2);
 		
 		
 		btnEffortMonitoringAnd = new JButton("Effort Monitoring");
-		btnEffortMonitoringAnd.setBounds(0, 460, 199, 80);
+		btnEffortMonitoringAnd.setBounds(0, 345, 199, 80);
 		panel.add(btnEffortMonitoringAnd);
 		
 		General.setVisible(true);
@@ -431,16 +550,6 @@ public class MainWindow implements FocusListener{
 		teamMembers.setBounds(185, 422, 537, 106);
 		General.add(teamMembers);
 		
-		EffortMonitoring.setBounds(200, 0, 815, 541);
-		frmProjectManager.getContentPane().add(EffortMonitoring);
-		EffortMonitoring.setLayout(null);
-		
-		JLabel lblEffortMonitoringandTracking = new JLabel("Effort Monitoring and Tracking");
-		lblEffortMonitoringandTracking.setHorizontalAlignment(SwingConstants.CENTER);
-		lblEffortMonitoringandTracking.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblEffortMonitoringandTracking.setBounds(298, 41, 250, 22);
-		EffortMonitoring.add(lblEffortMonitoringandTracking);
-		
 		//----------------------------------------------------------------
 		
 		
@@ -505,7 +614,7 @@ public class MainWindow implements FocusListener{
 				*/
 			}
 		});
-		btnRequirements.setBounds(0, 345, 199, 80);
+		btnRequirements.setBounds(0, 230, 199, 80);
 		panel.add(btnRequirements);
 		
 		//loadProject(fileToLoad);
