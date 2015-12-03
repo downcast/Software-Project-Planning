@@ -338,7 +338,7 @@ public class MainWindow implements FocusListener{
 				Requirements.setVisible(false);
 				EffortMonitoring.setVisible(false);
 				saveTempPane.setVisible(false);
-				General.setVisible(true);  //asdasd
+				General.setVisible(true);
 			}
 		});
 		btnNewButton_1.setBounds(0, 115, 199, 80);
