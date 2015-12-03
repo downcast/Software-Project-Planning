@@ -45,6 +45,8 @@ public class MainWindow implements FocusListener{
 	String state = "Edit";
 	private int funIndex, nonIndex = 0;
 	
+	private JPanel nonFunctionalScrollPanePanel;
+	private JPanel functionalScrollPanePanel;
 	private project currentProject;
 
 	/**
@@ -167,7 +169,7 @@ public class MainWindow implements FocusListener{
 		functionalScrollPane.setBounds(0, 70, 407, 401);
 		functionalPane.add(functionalScrollPane);
 		
-		JPanel functionalScrollPanePanel = new JPanel();
+		functionalScrollPanePanel = new JPanel();
 		functionalScrollPane.setViewportView(functionalScrollPanePanel);
 		
 		// Makes it so that when a textField is added, it adds it underneath the previous one like in a stack
@@ -246,7 +248,7 @@ public class MainWindow implements FocusListener{
 		nonFunctionalScrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		nonFunctionalPane.add(nonFunctionalScrollPane);
 		
-		JPanel nonFunctionalScrollPanePanel = new JPanel();
+		nonFunctionalScrollPanePanel = new JPanel();
 		nonFunctionalScrollPane.setViewportView(nonFunctionalScrollPanePanel);
 		
 		// Makes it so that when a textField is added, it adds it underneath the previous one like in a stack
@@ -474,7 +476,7 @@ public class MainWindow implements FocusListener{
 				General.setVisible(false);
 				Requirements.setVisible(true);
 				
-				ArrayList<Component> temp = new ArrayList<>();
+				/*ArrayList<Component> temp = new ArrayList<>();
 				for (Component j : nonFunctionalScrollPanePanel.getComponents()){
 					temp.add(j);
 				}
@@ -486,6 +488,7 @@ public class MainWindow implements FocusListener{
 				}
 				currentProject.setFunRequirements(temp2);
 				ProjectData.saveData(currentProject);
+				*/
 			}
 		});
 		btnRequirements.setBounds(0, 345, 199, 80);
@@ -534,6 +537,31 @@ public class MainWindow implements FocusListener{
 		description.setText(fileScan.nextLine());
 		teamMembers.setText(fileScan.nextLine());
 		*/	
+	}
+	
+	private void saveDataEntered(){
+		
+		/** Main Menu */
+		currentProject.setTitle(projectNameField.getText());
+		currentProject.setTitle(mainCustomerNameField.getText());
+		currentProject.setTitle(stakeholdersField.getText());
+		currentProject.setTitle(description.getText());
+		currentProject.setTitle(teamMembers.getText());
+		
+		/** Requirments */
+		ArrayList<Component> temp = new ArrayList<>();
+		for (Component j : nonFunctionalScrollPanePanel.getComponents()){
+			temp.add(j);
+		}
+		currentProject.setNonFunRequirements(temp);
+		
+		ArrayList<Component> temp2 = new ArrayList<>();
+		for (Component j : functionalScrollPanePanel.getComponents()){
+			temp2.add(j);
+		}
+		currentProject.setFunRequirements(temp2);
+		
+		ProjectData.saveData(currentProject);
 	}
 
 	@Override
