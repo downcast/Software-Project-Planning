@@ -138,11 +138,11 @@ public class MainWindow implements FocusListener{
 		JButton btnNewButton_2;
 		saveButton = new JButton("Save");
 		
-		/* saveButton.addActionListener(new ActionListener() {
+		saveButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//make this save the project
+				saveDataEntered();
 			}
-		});  */
+		});
 		
 		saveButton.setBounds(0, 230, 199, 80);
 		panel.add(saveButton);
@@ -544,10 +544,10 @@ public class MainWindow implements FocusListener{
 		
 		/** Main Menu */
 		currentProject.setTitle(projectNameField.getText());
-		currentProject.setTitle(mainCustomerNameField.getText());
-		currentProject.setTitle(stakeholdersField.getText());
-		currentProject.setTitle(description.getText());
-		currentProject.setTitle(teamMembers.getText());
+		currentProject.setCustomer(mainCustomerNameField.getText());
+		currentProject.setStakeholders(stakeholdersField.getText());
+		currentProject.setDescription(description.getText());
+		currentProject.setTeamMembers(teamMembers.getText());
 		
 		/** Requirments */
 		ArrayList<Component> temp = new ArrayList<>();
