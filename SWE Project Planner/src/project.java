@@ -17,6 +17,24 @@ public class project implements java.io.Serializable{
 	double actualCost;
 	Date startDate;
 	Date endDate;
+	ArrayList<person> projMembers = new ArrayList<person>();
+	
+	
+	void addMembers(String fn, String ln){
+		person per = new person();
+		per.setFirstName(fn);
+		per.setLastName(ln);
+		projMembers.add(per);
+	}
+	
+	void removeMembers(person p){
+		for(int i = 0; i < projMembers.size(); i++){
+			person cur = projMembers.get(i);
+			if(cur.getFirstName().equalsIgnoreCase(p.getFirstName()) && cur.getLastName().equalsIgnoreCase(p.getLastName())){
+				projMembers.remove(i);
+			}
+		}
+	}
 	
 	//set/get owner
 	void setCustomer(String own){
