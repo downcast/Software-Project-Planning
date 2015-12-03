@@ -1,5 +1,7 @@
 //import java.awt.EventQueue;
 import java.awt.*;
+
+import javax.imageio.ImageIO;
 //import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
@@ -131,7 +133,13 @@ public class WelcomeScreen {
 		frmProjectManager.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);//DISPOSE_ON_CLOSE);
 		frmProjectManager.getContentPane().setLayout(null);
 		frmProjectManager.setVisible(true);
-		
+		//Code for icon
+		try {
+			frmProjectManager.setIconImage(ImageIO.read(new File("src/PMLogo.png")));
+		} catch (IOException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
 		//description.getInputMap().put(KeyStroke.getKeyStroke("ENTER"), "doNothing");
 		
 		JLayeredPane RecentProjectPane = new JLayeredPane();

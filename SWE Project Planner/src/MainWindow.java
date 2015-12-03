@@ -3,6 +3,7 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import java.awt.Window.Type;
 import javax.swing.JPanel;
+import javax.imageio.ImageIO;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -101,6 +102,13 @@ public class MainWindow implements FocusListener{
 		frmProjectManager.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmProjectManager.getContentPane().setLayout(null);
 		frmProjectManager.setVisible(true);
+		//Code for icon
+		try {
+			frmProjectManager.setIconImage(ImageIO.read(new File("src/PMLogo.png")));
+		} catch (IOException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
 		
 		JLayeredPane Requirements = new JLayeredPane();
 		JLayeredPane saveTempPane = new JLayeredPane();
