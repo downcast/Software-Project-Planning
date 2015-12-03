@@ -48,6 +48,8 @@ public class MainWindow implements FocusListener{
 	private JPanel nonFunctionalScrollPanePanel;
 	private JPanel functionalScrollPanePanel;
 	private project currentProject;
+	private JButton newGeneralButton;
+	private JButton saveButton;
 
 	/**
 	 * Launch the application.
@@ -89,12 +91,12 @@ public class MainWindow implements FocusListener{
 		frmProjectManager.setVisible(true);
 		
 		JLayeredPane Requirements = new JLayeredPane();
-		JLayeredPane General = new JLayeredPane();
+		JLayeredPane saveTempPane = new JLayeredPane();
 		JLayeredPane EffortMonitoring = new JLayeredPane();
-		JLayeredPane MainMenu = new JLayeredPane();
+		JLayeredPane General = new JLayeredPane();
 		
 		Requirements.setVisible(false);
-		General.setVisible(false);  
+		saveTempPane.setVisible(false);  
 		EffortMonitoring.setVisible(false);
 		
 		JPanel panel = new JPanel();
@@ -119,38 +121,38 @@ public class MainWindow implements FocusListener{
 		frmProjectManager.getContentPane().add(Requirements);
 		Requirements.setLayout(null);
 		
-		JButton btnNewButton_1 = new JButton("Main Menu ");
-		btnNewButton_1.addActionListener(new ActionListener() {
+		JButton btnNewButton_1;
+		newGeneralButton = new JButton("General");
+		newGeneralButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Requirements.setVisible(false);
 				EffortMonitoring.setVisible(false);
-				General.setVisible(false);
-				MainMenu.setVisible(true);
-			}
-		});
-		
-		btnNewButton_1.setBounds(0, 115, 199, 80);
-		panel.add(btnNewButton_1);
-		
-		JButton btnNewButton_2 = new JButton("General");
-		btnNewButton_2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Requirements.setVisible(false);
-				MainMenu.setVisible(false);
-				EffortMonitoring.setVisible(false);
+				saveTempPane.setVisible(false);
 				General.setVisible(true);
 			}
 		});
 		
-		btnNewButton_2.setBounds(0, 230, 199, 80);
-		panel.add(btnNewButton_2);
+		newGeneralButton.setBounds(0, 115, 199, 80);
+		panel.add(newGeneralButton);
+		
+		JButton btnNewButton_2;
+		saveButton = new JButton("Save");
+		
+		/* saveButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//make this save the project
+			}
+		});  */
+		
+		saveButton.setBounds(0, 230, 199, 80);
+		panel.add(saveButton);
 		
 		JButton btnEffortMonitoringAnd = new JButton("Effort Monitoring");
 		btnEffortMonitoringAnd.setBounds(0, 460, 199, 80);
 		//This line caused effort monitoring issue. Leaving here in case needed.
 		//panel.add(btnEffortMonitoringAnd);
 		
-		MainMenu.setVisible(true);
+		General.setVisible(true);
 		
 		
 		JLabel lblRequirements = new JLabel("Requirements");
@@ -322,20 +324,19 @@ public class MainWindow implements FocusListener{
 			public void actionPerformed(ActionEvent e) {
 				Requirements.setVisible(false);
 				EffortMonitoring.setVisible(false);
-				General.setVisible(false);
-				MainMenu.setVisible(true);  //asdasd
+				saveTempPane.setVisible(false);
+				General.setVisible(true);  //asdasd
 			}
 		});
 		btnNewButton_1.setBounds(0, 115, 199, 80);
 		panel.add(btnNewButton_1);
-		
 		btnNewButton_2 = new JButton("General");
 		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Requirements.setVisible(false);
-				MainMenu.setVisible(false);
+				General.setVisible(false);
 				EffortMonitoring.setVisible(false);
-				General.setVisible(true);
+				saveTempPane.setVisible(true);
 			}
 		});
 		btnNewButton_2.setBounds(0, 230, 199, 80);
@@ -346,76 +347,76 @@ public class MainWindow implements FocusListener{
 		btnEffortMonitoringAnd.setBounds(0, 460, 199, 80);
 		panel.add(btnEffortMonitoringAnd);
 		
-		MainMenu.setVisible(true);
+		General.setVisible(true);
 		
 		// ------------------Main Menu-----------------------------------
-		MainMenu.setBounds(200, 0, 815, 541);
-		frmProjectManager.getContentPane().add(MainMenu);
-		MainMenu.setLayout(null);
+		General.setBounds(200, 0, 815, 541);
+		frmProjectManager.getContentPane().add(General);
+		General.setLayout(null);
 		
-		JLabel lblMainMenu = new JLabel("Main Menu");
-		lblMainMenu.setHorizontalAlignment(SwingConstants.CENTER);
-		lblMainMenu.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblMainMenu.setBounds(351, 41, 168, 22);
-		MainMenu.add(lblMainMenu);
+		JLabel lblnewGeneral = new JLabel("General");
+		lblnewGeneral.setHorizontalAlignment(SwingConstants.CENTER);
+		lblnewGeneral.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblnewGeneral.setBounds(351, 41, 168, 22);
+		General.add(lblnewGeneral);
 		
 		JLabel lblProjectName = new JLabel("Project Name:");
 		lblProjectName.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblProjectName.setBounds(40, 140, 150, 25);
-		MainMenu.add(lblProjectName);
+		General.add(lblProjectName);
 		
 		JLabel lblNewLabel = new JLabel("Main Customer's Name:");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblNewLabel.setBounds(40, 180, 217, 25);
-		MainMenu.add(lblNewLabel);
+		General.add(lblNewLabel);
 		
 		projectNameField = new JTextField();
 		projectNameField.setText("Project Name goes here");
 		projectNameField.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		projectNameField.setBounds(174, 140, 524, 25);
-		MainMenu.add(projectNameField);
+		General.add(projectNameField);
 		projectNameField.setColumns(10);
 		
 		mainCustomerNameField = new JTextField();
 		mainCustomerNameField.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		mainCustomerNameField.setBounds(251, 180, 447, 25);
-		MainMenu.add(mainCustomerNameField);
+		General.add(mainCustomerNameField);
 		mainCustomerNameField.setColumns(10);
 		
 		JLabel lblStakeholders = new JLabel("Stakeholders:");
 		lblStakeholders.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblStakeholders.setBounds(40, 220, 217, 25);
-		MainMenu.add(lblStakeholders);
+		General.add(lblStakeholders);
 		
 		stakeholdersField = new JTextField();
 		stakeholdersField.setText((String) null);
 		stakeholdersField.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		stakeholdersField.setColumns(10);
 		stakeholdersField.setBounds(161, 220, 537, 25);
-		MainMenu.add(stakeholdersField);
+		General.add(stakeholdersField);
 		
 		JLabel lblDescription = new JLabel("Description:");
 		lblDescription.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblDescription.setBounds(40, 260, 217, 25);
-		MainMenu.add(lblDescription);
+		General.add(lblDescription);
 		
 		description = new JTextArea();
 		description.setWrapStyleWord(true);
 		description.setLineWrap(true);
 		description.setBounds(161, 260, 537, 146);
-		MainMenu.add(description);
+		General.add(description);
 		
 		JLabel lblTeamMembers = new JLabel("Team Members:");
 		lblTeamMembers.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblTeamMembers.setBounds(40, 419, 217, 25);
-		MainMenu.add(lblTeamMembers);
+		General.add(lblTeamMembers);
 		
 		teamMembers = new JTextArea();
 		teamMembers.setWrapStyleWord(true);
 		teamMembers.setText((String) null);
 		teamMembers.setLineWrap(true);
 		teamMembers.setBounds(185, 422, 537, 106);
-		MainMenu.add(teamMembers);
+		General.add(teamMembers);
 		
 		EffortMonitoring.setBounds(200, 0, 815, 541);
 		frmProjectManager.getContentPane().add(EffortMonitoring);
@@ -433,15 +434,15 @@ public class MainWindow implements FocusListener{
 		
 		
 		//-------------------General--------------------------------------
-		General.setBounds(200, 0, 815, 541);
-		frmProjectManager.getContentPane().add(General);
-		General.setLayout(null);
+		saveTempPane.setBounds(200, 0, 815, 541);
+		frmProjectManager.getContentPane().add(saveTempPane);
+		saveTempPane.setLayout(null);
 		
 		JLabel lblGeneral = new JLabel("General");
 		lblGeneral.setHorizontalAlignment(SwingConstants.CENTER);
 		lblGeneral.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblGeneral.setBounds(351, 41, 168, 22);
-		General.add(lblGeneral);
+		saveTempPane.add(lblGeneral);
 		
 		
 		
@@ -462,8 +463,8 @@ public class MainWindow implements FocusListener{
 		btnEffortMonitoringAnd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Requirements.setVisible(false);
-				MainMenu.setVisible(false);
 				General.setVisible(false);
+				saveTempPane.setVisible(false);
 				EffortMonitoring.setVisible(true);
 			}
 		});
@@ -471,9 +472,9 @@ public class MainWindow implements FocusListener{
 		JButton btnRequirements = new JButton("Requirements");
 		btnRequirements.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				MainMenu.setVisible(false);
-				EffortMonitoring.setVisible(false);
 				General.setVisible(false);
+				EffortMonitoring.setVisible(false);
+				saveTempPane.setVisible(false);
 				Requirements.setVisible(true);
 				
 				/*ArrayList<Component> temp = new ArrayList<>();
